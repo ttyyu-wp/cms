@@ -40,4 +40,9 @@ public class ContactController {
     public JsonResult getOneContact(@RequestBody Contact contact) {
         return contactService.getOneContact(contact);
     }
+
+    @PostMapping("/update")
+    public JsonResult updateContact(@RequestBody Contact contact) {
+        return contactService.updateContact(contact);
+    }
 }

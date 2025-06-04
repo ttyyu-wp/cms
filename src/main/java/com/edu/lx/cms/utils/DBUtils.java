@@ -25,4 +25,10 @@ public interface DBUtils {
     Contact getOneContact(LambdaQueryWrapper<Contact> eq);
 
     Picture getContactPic(LambdaQueryWrapper<Picture> wrapper);
+
+    String getMaxContactID();
+
+    String getMaxContactPicID();
+
+    Integer updateContact(Contact contact);
 }

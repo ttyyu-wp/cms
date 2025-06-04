@@ -16,6 +16,7 @@ import com.edu.lx.cms.utils.DBUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Component
@@ -88,9 +89,49 @@ public class DBUtilsImpl implements DBUtils {
         return contactMapper.selectOne(wrapper);
     }
 
+    /**
+     * 获取当前联系人头像图片信息
+     * @param wrapper
+     * @return
+     */
     @Override
     public Picture getContactPic(LambdaQueryWrapper<Picture> wrapper) {
         return pictureMapper.selectOne(wrapper);
+    }
+
+    /**
+     * 获取数据库中当前最大的联系人 ID
+     * 服务于插入新的联系人
+     * @return
+     */
+    @Override
+    public String getMaxContactID() {
+        //获得全部Contact  获得list中的最大ctId
+        String ctId = contactMapper.selectList(Wrappers.lambdaQuery(Contact.class))
+                .stream().max(Comparator.comparing(Contact::getCtAd))
+                .get().getCtId();
+        //返回加1的字符串值
+        return Integer.parseInt(ctId) + 1 + "";
+    }
+
+    /**
+     * 获取数据库中当前最大的联系人图片 ID
+     * 服务于增加新的联系人图片记录
+     * @return
+     */
+    @Override
+    public String getMaxContactPicID() {
+        //获得全部Picture  获得list中的最大picId
+        String picId = pictureMapper.selectList(Wrappers.lambdaQuery(Picture.class))
+                .stream().max(Comparator.comparing(Picture::getPicId))
+                .get().getPicId();
+        //返回加1的字符串值
+        return Integer.parseInt(picId) + 1 + "";
+    }
+
+    @Override
+    public Integer updateContact(Contact contact) {
+        return contactMapper.updateById(contact);
     }
 
 

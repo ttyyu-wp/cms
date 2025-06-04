@@ -93,4 +93,21 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
         }
         return JsonResult.success(ContactEnum.CONTACT_QUERY_SUCCESS, contactVO);
     }
+
+    /**
+     * 更新联系人信息
+     * @param contact
+     * @return
+     */
+    @Override
+    public JsonResult updateContact(Contact contact) {
+        //获取更新的结果条数
+        Integer count = utils.updateContact(contact);
+        //若异常 报错
+        if (count < 0) {
+            return JsonResult.error(ContactEnum.CONTACT_MSG_ERROR);
+        }
+        //返回成功结果
+        return JsonResult.success(ContactEnum.CONTACT_UPDATE_SUCCESS);
+    }
 }
