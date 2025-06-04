@@ -1,6 +1,12 @@
 package com.edu.lx.cms.controller;
 
 
+import com.edu.lx.cms.domain.query.PageQuery;
+import com.edu.lx.cms.service.ContactService;
+import com.edu.lx.cms.utils.JsonResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -16,5 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/contact")
 public class ContactController {
+    @Autowired
+    private ContactService contactService;
 
+    @PostMapping("/page")
+    public JsonResult getTotalContactPage(@RequestBody PageQuery query) {
+        return contactService.getTotalContactPage(query);
+    }
+
+    @PostMapping("/list")
+    public JsonResult getContact(@RequestBody PageQuery query) {
+        return contactService.getContact(query);
+    }
 }

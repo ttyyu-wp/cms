@@ -1,7 +1,7 @@
 package com.edu.lx.cms.controller;
 
 
-import com.edu.lx.cms.domain.po.User;
+import com.edu.lx.cms.domain.pojo.User;
 import com.edu.lx.cms.service.UserService;
 import com.edu.lx.cms.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    //TODO 检测用户名或密码为空错误
     @PostMapping("/login")
     public JsonResult getUser(@RequestBody User user) {
         return userService.getUser(user);

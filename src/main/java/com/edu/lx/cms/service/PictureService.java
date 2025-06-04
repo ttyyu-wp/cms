@@ -1,7 +1,8 @@
 package com.edu.lx.cms.service;
 
-import com.edu.lx.cms.domain.po.Picture;
+import com.edu.lx.cms.domain.pojo.Picture;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.edu.lx.cms.utils.JsonResult;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PictureService extends IService<Picture> {
 
+    JsonResult getUserPic(String userId);
 }

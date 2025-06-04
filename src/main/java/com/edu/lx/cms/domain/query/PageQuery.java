@@ -6,10 +6,12 @@ import lombok.Data;
 
 @Data
 public class PageQuery {
+    private String userId;
     private Long pageNo;
     private Long pageSize;
     private String sortBy;
     private Boolean isAsc;
+    private String ctDelete;
 
     public <T> Page<T> toMpPage(OrderItem... orders){
         // 1.分页条件

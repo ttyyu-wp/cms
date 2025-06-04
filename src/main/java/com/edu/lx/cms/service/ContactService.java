@@ -1,7 +1,9 @@
 package com.edu.lx.cms.service;
 
-import com.edu.lx.cms.domain.po.Contact;
+import com.edu.lx.cms.domain.pojo.Contact;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.edu.lx.cms.domain.query.PageQuery;
+import com.edu.lx.cms.utils.JsonResult;
 
 /**
  * <p>
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ContactService extends IService<Contact> {
 
+    JsonResult getTotalContactPage(PageQuery query);
+
+    JsonResult getContact(PageQuery query);
 }

@@ -1,7 +1,7 @@
 package com.edu.lx.cms.enums;
 
 
-public enum MsgEnum {
+public enum UserEnum {
     USER_LOGIN_SUCCESS("登录成功！"),
     USER_REGISTER_SUCCESS("注册成功"),
     USER_NOT_FOUND("用户不存在！"),
@@ -10,7 +10,7 @@ public enum MsgEnum {
 
     private final String description;
 
-    MsgEnum(String description) {
+    UserEnum(String description) {
         this.description = description;
     }
 

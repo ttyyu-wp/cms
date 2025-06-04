@@ -1,4 +1,4 @@
-package com.edu.lx.cms.domain.po;
+package com.edu.lx.cms.domain.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
