@@ -74,4 +74,23 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
         List<Contact> records = utils.getContact(page, wrapper).getRecords();
         return JsonResult.success(ContactEnum.CONTACT_QUERY_SUCCESS, records);
     }
+
+    @Override
+    public JsonResult getOneContact(Contact contact) {
+        //判断参数是否符合要求
+        if (contact.getCtId() == null || contact.getCtDelete() == null) {
+            return JsonResult.error(ContactEnum.CONTACT_MSG_ERROR);
+        }
+        //构造查询语句
+
+        //查询对应Contact
+        Contact contactVO = utils.getOneContact(Wrappers.lambdaQuery(Contact.class)
+                .eq(Contact::getCtId, contact.getCtId())
+                .eq(Contact::getCtDelete, contact.getCtDelete()));
+        //为空报错
+        if (contactVO == null) {
+            return JsonResult.error(ContactEnum.CONTACT_NOT_FOUND);
+        }
+        return JsonResult.success(ContactEnum.CONTACT_QUERY_SUCCESS, contactVO);
+    }
 }

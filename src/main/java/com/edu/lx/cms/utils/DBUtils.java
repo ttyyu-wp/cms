@@ -20,4 +20,6 @@ public interface DBUtils {
     List<Contact> getTotalContactPage(LambdaQueryWrapper<Contact> wrapper);
 
     Page<Contact> getContact(Page<Contact> page, LambdaQueryWrapper<Contact> wrapper);
+
+    Contact getOneContact(LambdaQueryWrapper<Contact> eq);
 }

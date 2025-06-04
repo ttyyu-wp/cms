@@ -63,7 +63,6 @@ public class DBUtilsImpl implements DBUtils {
      */
     @Override
     public List<Contact> getTotalContactPage(LambdaQueryWrapper<Contact> wrapper) {
-
         return contactMapper.selectList(wrapper);
     }
 
@@ -76,6 +75,16 @@ public class DBUtilsImpl implements DBUtils {
     @Override
     public Page<Contact> getContact(Page<Contact> page, LambdaQueryWrapper<Contact> wrapper) {
         return contactMapper.selectPage(page, wrapper);
+    }
+
+    /**
+     * 获取当前联系人详细信息
+     * @param wrapper
+     * @return
+     */
+    @Override
+    public Contact getOneContact(LambdaQueryWrapper<Contact> wrapper) {
+        return contactMapper.selectOne(wrapper);
     }
 
 

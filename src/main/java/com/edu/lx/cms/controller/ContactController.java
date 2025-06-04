@@ -1,6 +1,7 @@
 package com.edu.lx.cms.controller;
 
 
+import com.edu.lx.cms.domain.pojo.Contact;
 import com.edu.lx.cms.domain.query.PageQuery;
 import com.edu.lx.cms.service.ContactService;
 import com.edu.lx.cms.utils.JsonResult;
@@ -33,5 +34,10 @@ public class ContactController {
     @PostMapping("/list")
     public JsonResult getContact(@RequestBody PageQuery query) {
         return contactService.getContact(query);
+    }
+
+    @PostMapping("/one")
+    public JsonResult getOneContact(@RequestBody Contact contact) {
+        return contactService.getOneContact(contact);
     }
 }

@@ -18,4 +18,6 @@ public interface ContactService extends IService<Contact> {
     JsonResult getTotalContactPage(PageQuery query);
 
     JsonResult getContact(PageQuery query);
+
+    JsonResult getOneContact(Contact contact);
 }
