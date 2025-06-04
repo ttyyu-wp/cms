@@ -129,9 +129,24 @@ public class DBUtilsImpl implements DBUtils {
         return Integer.parseInt(picId) + 1 + "";
     }
 
+    /**
+     * 更新联系人信息
+     * @param contact
+     * @return
+     */
     @Override
     public Integer updateContact(Contact contact) {
         return contactMapper.updateById(contact);
+    }
+
+    /**
+     * 更新联系人头像图片信息
+     * @param picture
+     * @return
+     */
+    @Override
+    public Integer updateContactPic(Picture picture) {
+        return pictureMapper.updateById(picture);
     }
 
 

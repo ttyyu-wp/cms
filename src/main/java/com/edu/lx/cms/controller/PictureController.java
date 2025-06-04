@@ -1,6 +1,7 @@
 package com.edu.lx.cms.controller;
 
 
+import com.edu.lx.cms.domain.pojo.Picture;
 import com.edu.lx.cms.service.PictureService;
 import com.edu.lx.cms.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,10 @@ public class PictureController {
     @PostMapping("/ctPic")
     public JsonResult getContactPic(@RequestParam("ctId") String ctId) {
         return pictureService.getContactPic(ctId);
+    }
+
+    @PostMapping("/update")
+    public JsonResult updateContactPic(@RequestBody Picture picture) {
+        return pictureService.updateContactPic(picture);
     }
 }

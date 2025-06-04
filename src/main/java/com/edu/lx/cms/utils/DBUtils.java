@@ -15,7 +15,6 @@ public interface DBUtils {
 
     void register(User user);
 
-
     List<UserPicture> getUserPic(LambdaQueryWrapper<UserPicture> wrapper);
 
     List<Contact> getTotalContactPage(LambdaQueryWrapper<Contact> wrapper);
@@ -31,4 +30,6 @@ public interface DBUtils {
     String getMaxContactPicID();
 
     Integer updateContact(Contact contact);
+
+    Integer updateContactPic(Picture picture);
 }

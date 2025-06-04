@@ -47,7 +47,7 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture> impl
         //返回图片名称
         String picName = pictureList.get(0).getPicName();
         //TODO html中不需要添加alert
-        return JsonResult.success(PictureEnum.PICTURE_SUCCESS, picName);
+        return JsonResult.success(PictureEnum.PICTURE_QUERY_SUCCESS, picName);
     }
 
     @Override
@@ -57,6 +57,15 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture> impl
         if (picture == null) {
             return JsonResult.error(PictureEnum.PICTURE_NOT_FOUND);
         }
-        return JsonResult.success(PictureEnum.PICTURE_SUCCESS, picture.getPicName());
+        return JsonResult.success(PictureEnum.PICTURE_QUERY_SUCCESS, picture.getPicName());
+    }
+
+    @Override
+    public JsonResult updateContactPic(Picture picture) {
+        Integer count = utils.updateContactPic(picture);
+        if (count < 0) {
+            return JsonResult.error(PictureEnum.PICTURE_NOT_FOUND);
+        }
+        return JsonResult.success(PictureEnum.PICTURE_UPDATE_SUCCESS);
     }
 }
