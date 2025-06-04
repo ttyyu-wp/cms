@@ -49,4 +49,14 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture> impl
         //TODO html中不需要添加alert
         return JsonResult.success(PictureEnum.PICTURE_SUCCESS, picName);
     }
+
+    @Override
+    public JsonResult getContactPic(String ctId) {
+        Picture picture = utils.getContactPic(Wrappers.lambdaQuery(Picture.class)
+                .eq(Picture::getCtId, ctId));
+        if (picture == null) {
+            return JsonResult.error(PictureEnum.PICTURE_NOT_FOUND);
+        }
+        return JsonResult.success(PictureEnum.PICTURE_SUCCESS, picture.getPicName());
+    }
 }

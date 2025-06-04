@@ -4,11 +4,7 @@ package com.edu.lx.cms.controller;
 import com.edu.lx.cms.service.PictureService;
 import com.edu.lx.cms.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -27,5 +23,10 @@ public class PictureController {
     @PostMapping
     public JsonResult getUserPic(@RequestParam("userId") String userId) {
         return pictureService.getUserPic(userId);
+    }
+
+    @PostMapping("/ctPic")
+    public JsonResult getContactPic(@RequestParam("ctId") String ctId) {
+        return pictureService.getContactPic(ctId);
     }
 }

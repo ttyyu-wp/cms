@@ -15,4 +15,6 @@ import com.edu.lx.cms.utils.JsonResult;
 public interface PictureService extends IService<Picture> {
 
     JsonResult getUserPic(String userId);
+
+    JsonResult getContactPic(String ctId);
 }

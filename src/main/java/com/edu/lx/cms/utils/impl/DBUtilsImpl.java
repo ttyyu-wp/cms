@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.edu.lx.cms.domain.pojo.Contact;
+import com.edu.lx.cms.domain.pojo.Picture;
 import com.edu.lx.cms.domain.pojo.User;
 import com.edu.lx.cms.domain.pojo.UserPicture;
 import com.edu.lx.cms.domain.query.PageQuery;
@@ -85,6 +86,11 @@ public class DBUtilsImpl implements DBUtils {
     @Override
     public Contact getOneContact(LambdaQueryWrapper<Contact> wrapper) {
         return contactMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public Picture getContactPic(LambdaQueryWrapper<Picture> wrapper) {
+        return pictureMapper.selectOne(wrapper);
     }
 
 
