@@ -51,4 +51,19 @@ public class MatterServiceImpl extends ServiceImpl<MatterMapper, Matter> impleme
                 .in(Matter::getCtId, ctIdList));
         return JsonResult.success(MatterEnum.MATTER_QUERY_SUCCESS, matterList);
     }
+
+    @Override
+    public JsonResult getMatterContact(MatterVO matterVO) {
+        //判断条件
+        if (!(matterVO.getMatterDelete() + "").matches("^[012]$")) {
+            return JsonResult.error(MatterEnum.MATTER_DELETE_ERROR);
+        }
+        if (matterVO.getCtId() == null || matterVO.getCtId().equals("")) {
+            return JsonResult.error(MatterEnum.MATTER_DELETE_ERROR);
+        }
+        List<Matter> list = utils.getMatterContact(Wrappers.lambdaQuery(Matter.class)
+                .eq(Matter::getCtId, matterVO.getCtId())
+                .eq(Matter::getMatterDelete, matterVO.getMatterDelete()));
+        return JsonResult.success(MatterEnum.MATTER_QUERY_SUCCESS, list);
+    }
 }

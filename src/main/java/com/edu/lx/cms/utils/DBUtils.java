@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.edu.lx.cms.domain.po.*;
 
+import javax.management.Query;
 import java.util.List;
 
 public interface DBUtils {
@@ -42,4 +43,6 @@ public interface DBUtils {
 
 
     List<Matter> getMatterUser(LambdaQueryWrapper<Matter> in);
+
+    List<Matter> getMatterContact(LambdaQueryWrapper<Matter> eq);
 }

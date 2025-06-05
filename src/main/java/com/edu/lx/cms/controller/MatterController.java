@@ -27,7 +27,12 @@ public class MatterController {
     private MatterService matterService;
 
     @PostMapping("/all")
-    private JsonResult getMatterUser(@RequestBody MatterVO matterVO) {
+    public JsonResult getMatterUser(@RequestBody MatterVO matterVO) {
         return matterService.getMatterUser(matterVO);
+    }
+
+    @PostMapping("/one")
+    public JsonResult getMatterContact(@RequestBody MatterVO matterVO) {
+        return matterService.getMatterContact(matterVO);
     }
 }

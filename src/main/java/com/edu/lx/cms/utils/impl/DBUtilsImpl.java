@@ -10,6 +10,7 @@ import com.edu.lx.cms.utils.DBUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.management.Query;
 import java.util.Comparator;
 import java.util.List;
 
@@ -194,6 +195,16 @@ public class DBUtilsImpl implements DBUtils {
      */
     @Override
     public List<Matter> getMatterUser(LambdaQueryWrapper<Matter> wrapper) {
+        return matterMapper.selectList(wrapper);
+    }
+
+    /**
+     * 获取当前联系人所有事项
+     * @param wrapper
+     * @return
+     */
+    @Override
+    public List<Matter> getMatterContact(LambdaQueryWrapper<Matter> wrapper) {
         return matterMapper.selectList(wrapper);
     }
 

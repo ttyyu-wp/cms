@@ -16,4 +16,6 @@ import com.edu.lx.cms.utils.JsonResult;
 public interface MatterService extends IService<Matter> {
 
     JsonResult getMatterUser(MatterVO matterVO);
+
+    JsonResult getMatterContact(MatterVO matterVO);
 }
