@@ -5,6 +5,7 @@ public enum ContactEnum {
     CONTACT_ADD_SUCCESS("添加成功！"),
     CONTACT_UPDATE_SUCCESS("更新成功！"),
     CONTACT_DELETE_SUCCESS("黑名单添加成功！"),
+    CONTACT_CANCEL_DELETE_SUCCESS("黑名单移除成功！"),
     CONTACT_YB_ERROR("邮编格式不正确！"),
     CONTACT_QQ_ERROR("QQ格式不正确！"),
     CONTACT_EMAIL_ERROR("邮箱格式不正确！"),

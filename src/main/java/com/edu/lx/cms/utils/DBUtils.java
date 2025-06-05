@@ -39,4 +39,6 @@ public interface DBUtils {
     void addContactPic(Picture picture);
 
     void deleteContact(LambdaUpdateWrapper<Contact> set);
+
+    void cancelDeleteContact(LambdaUpdateWrapper<Contact> eq);
 }

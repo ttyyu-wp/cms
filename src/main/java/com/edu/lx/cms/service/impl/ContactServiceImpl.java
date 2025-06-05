@@ -152,4 +152,14 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
         return JsonResult.success(ContactEnum.CONTACT_DELETE_SUCCESS);
 
     }
+
+    @Override
+    public JsonResult cancelDeleteContact(String ctId) {
+        if (ctId.equals("") || ctId == null) {
+            return JsonResult.error(ContactEnum.CONTACT_MSG_ERROR);
+        }
+        utils.cancelDeleteContact(Wrappers.lambdaUpdate(Contact.class)
+                .eq(Contact::getCtId, ctId));
+        return JsonResult.success(ContactEnum.CONTACT_CANCEL_DELETE_SUCCESS);
+    }
 }

@@ -164,9 +164,22 @@ public class DBUtilsImpl implements DBUtils {
         pictureMapper.insert(picture);
     }
 
+    /**
+     * 联系人放入黑名单
+     * @param wrapper
+     */
     @Override
     public void deleteContact(LambdaUpdateWrapper<Contact> wrapper) {
         contactMapper.update(new Contact().setCtDelete(1), wrapper);
+    }
+
+    /**
+     * 恢复黑名单联系人
+     * @param wrapper
+     */
+    @Override
+    public void cancelDeleteContact(LambdaUpdateWrapper<Contact> wrapper) {
+        contactMapper.update(new Contact().setCtDelete(0), wrapper);
     }
 
 

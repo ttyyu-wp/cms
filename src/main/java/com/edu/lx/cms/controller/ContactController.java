@@ -51,4 +51,9 @@ public class ContactController {
     public JsonResult deleteContact(@RequestParam("ctId") String ctId) {
         return contactService.deleteContact(ctId);
     }
+
+    @GetMapping("/cancel")
+    public JsonResult cancelDeleteContact(@RequestParam("ctId") String ctId) {
+        return contactService.cancelDeleteContact(ctId);
+    }
 }
