@@ -1,7 +1,7 @@
 package com.edu.lx.cms.controller;
 
 
-import com.edu.lx.cms.domain.pojo.Contact;
+import com.edu.lx.cms.domain.po.Contact;
 import com.edu.lx.cms.domain.query.PageQuery;
 import com.edu.lx.cms.service.ContactService;
 import com.edu.lx.cms.utils.JsonResult;
@@ -56,4 +56,5 @@ public class ContactController {
     public JsonResult cancelDeleteContact(@RequestParam("ctId") String ctId) {
         return contactService.cancelDeleteContact(ctId);
     }
+
 }

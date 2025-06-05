@@ -1,6 +1,6 @@
 package com.edu.lx.cms.service.impl;
 
-import com.edu.lx.cms.domain.pojo.User;
+import com.edu.lx.cms.domain.po.User;
 import com.edu.lx.cms.mapper.UserMapper;
 import com.edu.lx.cms.enums.UserEnum;
 import com.edu.lx.cms.service.UserService;

@@ -1,7 +1,7 @@
 package com.edu.lx.cms.controller;
 
 
-import com.edu.lx.cms.domain.pojo.Picture;
+import com.edu.lx.cms.domain.po.Picture;
 import com.edu.lx.cms.service.PictureService;
 import com.edu.lx.cms.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;

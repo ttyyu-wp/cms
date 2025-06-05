@@ -1,4 +1,4 @@
-package com.edu.lx.cms.domain.pojo;
+package com.edu.lx.cms.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 联系人图片信息表
+ * 用户信息表
  * </p>
  *
  * @author LiXue
@@ -21,27 +21,21 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_picture")
-public class Picture implements Serializable {
+@TableName("t_user")
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 图片ID
+     * 用户ID号码
      */
-    @TableId(value = "pic_id", type = IdType.INPUT)
-    private String picId;
+    @TableId(value = "user_id", type = IdType.INPUT)
+    private String userId;
 
     /**
-     * 联系人ID号码
+     * 用户登陆密码
      */
-    @TableField("ct_id")
-    private String ctId;
-
-    /**
-     * 图片名称
-     */
-    @TableField("pic_name")
-    private String picName;
+    @TableField("user_password")
+    private String userPassword;
 
 }

@@ -1,7 +1,7 @@
 package com.edu.lx.cms.controller;
 
 
-import com.edu.lx.cms.domain.pojo.User;
+import com.edu.lx.cms.domain.po.User;
 import com.edu.lx.cms.service.UserService;
 import com.edu.lx.cms.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;

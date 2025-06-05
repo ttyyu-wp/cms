@@ -1,7 +1,7 @@
 package com.edu.lx.cms.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.edu.lx.cms.domain.pojo.UserPicture;
+import com.edu.lx.cms.domain.po.UserPicture;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

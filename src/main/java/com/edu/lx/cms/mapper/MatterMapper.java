@@ -1,6 +1,6 @@
 package com.edu.lx.cms.mapper;
 
-import com.edu.lx.cms.domain.pojo.Matter;
+import com.edu.lx.cms.domain.po.Matter;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

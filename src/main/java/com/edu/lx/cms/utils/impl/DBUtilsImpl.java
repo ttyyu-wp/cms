@@ -4,15 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.edu.lx.cms.domain.pojo.Contact;
-import com.edu.lx.cms.domain.pojo.Picture;
-import com.edu.lx.cms.domain.pojo.User;
-import com.edu.lx.cms.domain.pojo.UserPicture;
-import com.edu.lx.cms.domain.query.PageQuery;
-import com.edu.lx.cms.mapper.ContactMapper;
-import com.edu.lx.cms.mapper.PictureMapper;
-import com.edu.lx.cms.mapper.UserMapper;
-import com.edu.lx.cms.mapper.UserPictureMapper;
+import com.edu.lx.cms.domain.po.*;
+import com.edu.lx.cms.mapper.*;
 import com.edu.lx.cms.utils.DBUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +21,8 @@ public class DBUtilsImpl implements DBUtils {
     private PictureMapper pictureMapper;
     @Autowired
     private ContactMapper contactMapper;
+    @Autowired
+    private MatterMapper matterMapper;
     @Autowired
     private UserPictureMapper userPictureMapper;
 
@@ -180,6 +175,26 @@ public class DBUtilsImpl implements DBUtils {
     @Override
     public void cancelDeleteContact(LambdaUpdateWrapper<Contact> wrapper) {
         contactMapper.update(new Contact().setCtDelete(0), wrapper);
+    }
+
+    /**
+     * 获取当前用户所有Contact 返回List
+     * @param wrapper
+     * @return
+     */
+    @Override
+    public List<Contact> getAllContact(LambdaQueryWrapper<Contact> wrapper) {
+        return contactMapper.selectList(wrapper);
+    }
+
+    /**
+     * 获取当前用户所有事项
+     * @param wrapper
+     * @return
+     */
+    @Override
+    public List<Matter> getMatterUser(LambdaQueryWrapper<Matter> wrapper) {
+        return matterMapper.selectList(wrapper);
     }
 
 

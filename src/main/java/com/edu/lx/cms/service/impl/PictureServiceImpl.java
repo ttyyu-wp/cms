@@ -2,8 +2,8 @@ package com.edu.lx.cms.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.edu.lx.cms.domain.pojo.Picture;
-import com.edu.lx.cms.domain.pojo.UserPicture;
+import com.edu.lx.cms.domain.po.Picture;
+import com.edu.lx.cms.domain.po.UserPicture;
 import com.edu.lx.cms.enums.PictureEnum;
 import com.edu.lx.cms.mapper.PictureMapper;
 import com.edu.lx.cms.service.PictureService;

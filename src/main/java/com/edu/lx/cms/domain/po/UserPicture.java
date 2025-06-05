@@ -1,10 +1,7 @@
-package com.edu.lx.cms.domain.pojo;
+package com.edu.lx.cms.domain.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,30 +9,37 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户信息表
+ * 用户图片信息表
  * </p>
  *
  * @author LiXue
- * @since 2025-06-03
+ * @since 2025-06-04
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_user")
-public class User implements Serializable {
+@TableName("t_user_picture")
+public class UserPicture implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 用户ID号码
+     * 用户ID
      */
-    @TableId(value = "user_id", type = IdType.INPUT)
+    @TableField("user_id")
     private String userId;
 
     /**
-     * 用户登陆密码
+     * 图片ID
      */
-    @TableField("user_password")
-    private String userPassword;
+    @TableField("pic_id")
+    private String picId;
+
+    /**
+     * 图片文件名
+     */
+    @TableField("pic_name")
+    private String picName;
+
 
 }

@@ -3,11 +3,7 @@ package com.edu.lx.cms.utils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.edu.lx.cms.domain.pojo.Contact;
-import com.edu.lx.cms.domain.pojo.Picture;
-import com.edu.lx.cms.domain.pojo.User;
-import com.edu.lx.cms.domain.pojo.UserPicture;
-import com.edu.lx.cms.domain.query.PageQuery;
+import com.edu.lx.cms.domain.po.*;
 
 import java.util.List;
 
@@ -41,4 +37,9 @@ public interface DBUtils {
     void deleteContact(LambdaUpdateWrapper<Contact> set);
 
     void cancelDeleteContact(LambdaUpdateWrapper<Contact> eq);
+
+    List<Contact> getAllContact(LambdaQueryWrapper<Contact> eq);
+
+
+    List<Matter> getMatterUser(LambdaQueryWrapper<Matter> in);
 }
