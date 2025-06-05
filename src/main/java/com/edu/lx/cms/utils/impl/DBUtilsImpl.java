@@ -1,6 +1,7 @@
 package com.edu.lx.cms.utils.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.edu.lx.cms.domain.pojo.Contact;
@@ -161,6 +162,11 @@ public class DBUtilsImpl implements DBUtils {
     @Override
     public void addContactPic(Picture picture) {
         pictureMapper.insert(picture);
+    }
+
+    @Override
+    public void deleteContact(LambdaUpdateWrapper<Contact> wrapper) {
+        contactMapper.update(new Contact().setCtDelete(1), wrapper);
     }
 
 

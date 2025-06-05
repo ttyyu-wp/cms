@@ -6,11 +6,7 @@ import com.edu.lx.cms.domain.query.PageQuery;
 import com.edu.lx.cms.service.ContactService;
 import com.edu.lx.cms.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -49,5 +45,10 @@ public class ContactController {
     @PostMapping("/add")
     public JsonResult addContact(@RequestBody Contact contact) {
         return contactService.addContact(contact);
+    }
+
+    @DeleteMapping("/delete")
+    public JsonResult deleteContact(@RequestParam("ctId") String ctId) {
+        return contactService.deleteContact(ctId);
     }
 }

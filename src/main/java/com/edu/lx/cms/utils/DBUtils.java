@@ -1,6 +1,7 @@
 package com.edu.lx.cms.utils;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.edu.lx.cms.domain.pojo.Contact;
 import com.edu.lx.cms.domain.pojo.Picture;
@@ -36,4 +37,6 @@ public interface DBUtils {
     void addContact(Contact contact);
 
     void addContactPic(Picture picture);
+
+    void deleteContact(LambdaUpdateWrapper<Contact> set);
 }

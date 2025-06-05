@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.edu.lx.cms.domain.pojo.Contact;
+import com.edu.lx.cms.domain.pojo.Picture;
 import com.edu.lx.cms.domain.query.PageQuery;
 import com.edu.lx.cms.enums.ContactEnum;
 import com.edu.lx.cms.mapper.ContactMapper;
@@ -139,5 +140,16 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
         contact.setCtDelete(0);
         utils.addContact(contact);
         return JsonResult.success(ContactEnum.CONTACT_ADD_SUCCESS);
+    }
+
+    @Override
+    public JsonResult deleteContact(String ctId) {
+        if (ctId.equals("") || ctId == null) {
+            return JsonResult.error(ContactEnum.CONTACT_MSG_ERROR);
+        }
+        utils.deleteContact(Wrappers.lambdaUpdate(Contact.class)
+                .eq(Contact::getCtId, ctId));
+        return JsonResult.success(ContactEnum.CONTACT_DELETE_SUCCESS);
+
     }
 }
