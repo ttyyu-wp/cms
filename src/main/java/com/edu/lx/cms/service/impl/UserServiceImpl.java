@@ -7,6 +7,8 @@ import com.edu.lx.cms.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.edu.lx.cms.utils.DBUtils;
 import com.edu.lx.cms.utils.JsonResult;
+import com.edu.lx.cms.utils.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
  * @since 2025-06-03
  */
 @Service
+@Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Autowired
     private DBUtils utils;
@@ -35,7 +38,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return JsonResult.error(UserEnum.USER_PASSWORD_ERROR);
         }
         //返回结果
-        return JsonResult.success(UserEnum.USER_LOGIN_SUCCESS);
+        String token = JwtUtil.createToken(user);
+        return JsonResult.success(UserEnum.USER_LOGIN_SUCCESS, token);
     }
 
     @Override
