@@ -35,4 +35,9 @@ public class PictureController {
     public JsonResult updateContactPic(@RequestBody Picture picture) {
         return pictureService.updateContactPic(picture);
     }
+
+    @PostMapping("/add")
+    public JsonResult addContactPic(@RequestBody Picture picture) {
+        return pictureService.addContactPic(picture);
+    }
 }

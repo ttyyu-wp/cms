@@ -145,9 +145,22 @@ public class DBUtilsImpl implements DBUtils {
         return pictureMapper.updateById(picture);
     }
 
+    /**
+     * 添加联系人
+     * @param contact
+     */
     @Override
     public void addContact(Contact contact) {
         contactMapper.insert(contact);
+    }
+
+    /**
+     * 添加联系人头像图片
+     * @param picture
+     */
+    @Override
+    public void addContactPic(Picture picture) {
+        pictureMapper.insert(picture);
     }
 
 

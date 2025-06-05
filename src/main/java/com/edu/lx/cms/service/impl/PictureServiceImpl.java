@@ -68,4 +68,14 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture> impl
         }
         return JsonResult.success(PictureEnum.PICTURE_UPDATE_SUCCESS);
     }
+
+    @Override
+    public JsonResult addContactPic(Picture picture) {
+        if (picture.getPicName() == null || picture.getPicName().equals("")) {
+            return JsonResult.error(PictureEnum.PICTURE_ERROR);
+        }
+        picture.setPicId(Integer.parseInt(utils.getMaxContactPicID()) + 1 + "");
+        utils.addContactPic(picture);
+        return JsonResult.success(PictureEnum.PICTURE_ADD_SUCCESS);
+    }
 }

@@ -19,4 +19,6 @@ public interface PictureService extends IService<Picture> {
     JsonResult getContactPic(String ctId);
 
     JsonResult updateContactPic(Picture picture);
+
+    JsonResult addContactPic(Picture picture);
 }

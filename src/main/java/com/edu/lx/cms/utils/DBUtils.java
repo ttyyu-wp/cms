@@ -34,4 +34,6 @@ public interface DBUtils {
     Integer updateContactPic(Picture picture);
 
     void addContact(Contact contact);
+
+    void addContactPic(Picture picture);
 }
