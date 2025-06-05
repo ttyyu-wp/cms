@@ -29,6 +29,10 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
 
     private final Long DEFAULT_PAGESIZE = Long.parseLong("5");
     private final Long DEFAULT_PAGENO = Long.parseLong("0");
+    private static final String POSTAL_CODE_REGEX = "^[1-9]\\d{5}(?!\\d)$";
+    private static final String QQ_REGEX = "^[1-9][0-9]{4,}$";
+    private static final String PHONE_REGEX = "^1[3-9]\\d{9}$";
+    private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
 
     @Autowired
     private DBUtils utils;
@@ -109,5 +113,31 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
         }
         //返回成功结果
         return JsonResult.success(ContactEnum.CONTACT_UPDATE_SUCCESS);
+    }
+
+    @Override
+    public JsonResult addContact(Contact contact) {
+        //判断邮编格式是否合规
+        if (contact.getCtYb() == null || !contact.getCtYb().matches(POSTAL_CODE_REGEX)) {
+            return JsonResult.error(ContactEnum.CONTACT_YB_ERROR);
+        }
+        //判断QQ格式是否合规
+        if (contact.getCtQq() == null || !contact.getCtQq().matches(QQ_REGEX)) {
+            return JsonResult.error(ContactEnum.CONTACT_QQ_ERROR);
+        }
+        //判断邮箱是否合规
+        if (contact.getCtEm() == null || !contact.getCtEm().matches(EMAIL_REGEX)) {
+            return JsonResult.error(ContactEnum.CONTACT_EMAIL_ERROR);
+        }
+        //判断电话格式是否合规
+        if (contact.getCtPhone() == null || !contact.getCtPhone().matches(PHONE_REGEX)) {
+            return JsonResult.error(ContactEnum.CONTACT_PHONE_ERROR);
+        }
+        //设定联系人id为数据库中最大ID值加1
+        contact.setCtId(Integer.parseInt(utils.getMaxContactID()) + 1 + "");
+        //设定联系人状态默认为正常0
+        contact.setCtDelete(0);
+        utils.addContact(contact);
+        return JsonResult.success(ContactEnum.CONTACT_ADD_SUCCESS);
     }
 }

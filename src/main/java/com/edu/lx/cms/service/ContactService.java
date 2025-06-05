@@ -22,4 +22,6 @@ public interface ContactService extends IService<Contact> {
     JsonResult getOneContact(Contact contact);
 
     JsonResult updateContact(Contact contact);
+
+    JsonResult addContact(Contact contact);
 }

@@ -45,4 +45,9 @@ public class ContactController {
     public JsonResult updateContact(@RequestBody Contact contact) {
         return contactService.updateContact(contact);
     }
+
+    @PostMapping("/add")
+    public JsonResult addContact(@RequestBody Contact contact) {
+        return contactService.addContact(contact);
+    }
 }

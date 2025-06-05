@@ -106,12 +106,10 @@ public class DBUtilsImpl implements DBUtils {
      */
     @Override
     public String getMaxContactID() {
-        //获得全部Contact  获得list中的最大ctId
-        String ctId = contactMapper.selectList(Wrappers.lambdaQuery(Contact.class))
-                .stream().max(Comparator.comparing(Contact::getCtAd))
+        //获得全部Contact  获得list中的最大ctId 返回其值
+        return contactMapper.selectList(Wrappers.lambdaQuery(Contact.class))
+                .stream().max(Comparator.comparing(Contact::getCtId))
                 .get().getCtId();
-        //返回加1的字符串值
-        return Integer.parseInt(ctId) + 1 + "";
     }
 
     /**
@@ -121,12 +119,10 @@ public class DBUtilsImpl implements DBUtils {
      */
     @Override
     public String getMaxContactPicID() {
-        //获得全部Picture  获得list中的最大picId
-        String picId = pictureMapper.selectList(Wrappers.lambdaQuery(Picture.class))
+        //获得全部Picture  获得list中的最大picId 返回其值
+        return pictureMapper.selectList(Wrappers.lambdaQuery(Picture.class))
                 .stream().max(Comparator.comparing(Picture::getPicId))
                 .get().getPicId();
-        //返回加1的字符串值
-        return Integer.parseInt(picId) + 1 + "";
     }
 
     /**
@@ -147,6 +143,11 @@ public class DBUtilsImpl implements DBUtils {
     @Override
     public Integer updateContactPic(Picture picture) {
         return pictureMapper.updateById(picture);
+    }
+
+    @Override
+    public void addContact(Contact contact) {
+        contactMapper.insert(contact);
     }
 
 
