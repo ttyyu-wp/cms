@@ -1,5 +1,7 @@
 package com.edu.lx.cms.interceptor;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.edu.lx.cms.context.UserContext;
 import com.edu.lx.cms.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.logging.Logger;
@@ -18,10 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 @Slf4j
 public class JwtInterceptor implements HandlerInterceptor {
-    /**
-     * 使用LoggerFactory创建一个Logger实例，用于记录日志信息。
-     */
-    //private static final Logger logger = LoggerFactory.getLogger(JwtInterceptor.class);
+
 
     /**
      * preHandle方法在请求处理之前被调用，用于在Controller方法执行之前进行预处理。
@@ -48,7 +47,6 @@ public class JwtInterceptor implements HandlerInterceptor {
          */
         if (token == null || !token.startsWith("Bearer ")) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            /*response.getWriter().write("令牌丢失或无效");*/
             log.error("令牌丢失或无效");
             return false; // 中断请求
         }
@@ -69,15 +67,33 @@ public class JwtInterceptor implements HandlerInterceptor {
              * 如果令牌无效或已过期，设置响应状态为401 Unauthorized，并返回错误信息。
              */
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            /*response.getWriter().write("令牌无效或已过期");*/
             log.error("令牌无效或已过期");
 
             return false; // 中断请求
         }
 
+        // 解析出 userId 并存入线程上下文
+        try {
+            DecodedJWT decodedJWT = JwtUtil.decodeToken(authToken); // 新增的方法
+            String userId = decodedJWT.getClaim("userId").asString();
+
+            // 将 userId 存入线程上下文
+            UserContext.setCurrentUser(userId);
+        } catch (Exception e) {
+            log.error("无法从 Token 中提取用户ID", e);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return false;
+        }
+
+
         /**
          * 如果令牌验证成功，返回true以继续执行下一个拦截器或Controller。
          */
         return true;
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        UserContext.clear();
     }
 }

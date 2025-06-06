@@ -2,6 +2,7 @@ package com.edu.lx.cms.service.impl;
 
 import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.edu.lx.cms.context.UserContext;
 import com.edu.lx.cms.domain.po.Contact;
 import com.edu.lx.cms.domain.po.Matter;
 import com.edu.lx.cms.domain.vo.MatterVO;
@@ -42,12 +43,11 @@ public class MatterServiceImpl extends ServiceImpl<MatterMapper, Matter> impleme
         if (!(matterVO.getMatterDelete() + "").matches("^[012]$")) {
             return JsonResult.error(MatterEnum.MATTER_DELETE_ERROR);
         }
-        if (matterVO.getUserId() == null || matterVO.getUserId().equals("")) {
-            return JsonResult.error(MatterEnum.MATTER_DELETE_ERROR);
-        }
+        //根据线程获得userId
+        String userId = UserContext.getCurrentUser();
         //根据userId获得所有当前用户的联系人状态为 0 正常 的contactList 再通过stream流获得ctIdList
         List<String> ctIdList = utils.getAllContact(Wrappers.lambdaQuery(Contact.class)
-                        .eq(Contact::getUserId, matterVO.getUserId())
+                        .eq(Contact::getUserId, userId)
                         .eq(Contact::getCtDelete, matterVO.getMatterDelete()))
                 .stream()
                 .map(Contact::getCtId)

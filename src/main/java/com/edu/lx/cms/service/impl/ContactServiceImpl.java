@@ -3,6 +3,7 @@ package com.edu.lx.cms.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.edu.lx.cms.context.UserContext;
 import com.edu.lx.cms.domain.po.Contact;
 import com.edu.lx.cms.domain.query.PageQuery;
 import com.edu.lx.cms.enums.ContactEnum;
@@ -39,17 +40,20 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
 
     @Override
     public JsonResult getTotalContactPage(PageQuery query) {
+
         //判断参数是否符合要求
-        if (query.getUserId() == null || query.getCtDelete() == null) {
+        if (query.getCtDelete() == null || !query.getCtDelete().matches("^[01]$")) {
             return JsonResult.error(ContactEnum.CONTACT_MSG_ERROR);
         }
+        //从线程中获得userId
+        String userId = UserContext.getCurrentUser();
         //设定每页默认值
         if (query.getPageSize() == null || query.getPageSize() == 0) {
             query.setPageSize(DEFAULT_PAGESIZE);
         }
         //构造查询条件
         LambdaQueryWrapper<Contact> wrapper = Wrappers.lambdaQuery();
-        wrapper.eq(Contact::getUserId, query.getUserId())
+        wrapper.eq(Contact::getUserId, userId)
                 .eq(Contact::getCtDelete, query.getCtDelete());
         List<Contact> list = utils.getTotalContactPage(wrapper);
         double totalPage = Math.ceil(1.00 * list.size() / query.getPageSize());
@@ -60,10 +64,11 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
     @Override
     public JsonResult getContact(PageQuery query) {
         //判断参数是否符合要求
-        if (query.getUserId() == null ||
-            query.getCtDelete() == null) {
+        if (query.getCtDelete() == null || !query.getCtDelete().matches("^[01]$")) {
             return JsonResult.error(ContactEnum.CONTACT_MSG_ERROR);
         }
+        //从线程中获得userId
+        String userId = UserContext.getCurrentUser();
         //设定每页默认值
         if (query.getPageNo() == null || query.getPageSize() == null || query.getPageSize() == 0) {
             query.setPageSize(DEFAULT_PAGESIZE);
@@ -73,7 +78,7 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
         Page<Contact> page = new Page<>(query.getPageNo(), query.getPageSize());
 
         LambdaQueryWrapper<Contact> wrapper = Wrappers.lambdaQuery();
-        wrapper.eq(Contact::getUserId, query.getUserId())
+        wrapper.eq(Contact::getUserId, userId)
                 .eq(Contact::getCtDelete, query.getCtDelete());
         List<Contact> records = utils.getContact(page, wrapper).getRecords();
         return JsonResult.success(ContactEnum.CONTACT_QUERY_SUCCESS, records);
@@ -85,9 +90,7 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
         if (contact.getCtId() == null || contact.getCtDelete() == null) {
             return JsonResult.error(ContactEnum.CONTACT_MSG_ERROR);
         }
-        //构造查询语句
-
-        //查询对应Contact
+        //构造查询语句 查询对应Contact
         Contact contactVO = utils.getOneContact(Wrappers.lambdaQuery(Contact.class)
                 .eq(Contact::getCtId, contact.getCtId())
                 .eq(Contact::getCtDelete, contact.getCtDelete()));
@@ -137,13 +140,15 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
         contact.setCtId(Integer.parseInt(utils.getMaxContactID()) + 1 + "");
         //设定联系人状态默认为正常0
         contact.setCtDelete(0);
+        //设定联系人的userId为当前用户Id
+        contact.setUserId(UserContext.getCurrentUser());
         utils.addContact(contact);
         return JsonResult.success(ContactEnum.CONTACT_ADD_SUCCESS);
     }
 
     @Override
     public JsonResult deleteContact(String ctId) {
-        if (ctId.equals("") || ctId == null) {
+        if (ctId.equals("")) {
             return JsonResult.error(ContactEnum.CONTACT_MSG_ERROR);
         }
         utils.deleteContact(Wrappers.lambdaUpdate(Contact.class)

@@ -46,7 +46,6 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture> impl
         }
         //返回图片名称
         String picName = pictureList.get(0).getPicName();
-        //TODO html中不需要添加alert
         return JsonResult.success(PictureEnum.PICTURE_QUERY_SUCCESS, picName);
     }
 

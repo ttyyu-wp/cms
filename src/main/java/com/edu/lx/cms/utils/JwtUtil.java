@@ -177,4 +177,25 @@ public class JwtUtil {
         }
 
     }
+
+    /**
+     * 解码并验证 Token，返回 DecodedJWT 对象。
+     *
+     * @param token 要解码的 JWT 字符串
+     * @return 返回解码后的 DecodedJWT 对象
+     */
+    public static DecodedJWT decodeToken(String token) {
+        if (token == null || token.isEmpty()) {
+            throw new IllegalArgumentException("Token 不能为空");
+        }
+
+        try {
+            // 构建 JWTVerifier 并验证 Token
+            JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secretKey)).build();
+            return verifier.verify(token);
+        } catch (JWTVerificationException e) {
+            logger.error("Token 解码失败: {}", e.getMessage());
+            throw new RuntimeException("Token 解码失败", e);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.edu.lx.cms.controller;
 
 
+import com.edu.lx.cms.context.UserContext;
 import com.edu.lx.cms.domain.po.Picture;
 import com.edu.lx.cms.service.PictureService;
 import com.edu.lx.cms.utils.JsonResult;
@@ -22,8 +23,8 @@ public class PictureController {
     private PictureService pictureService;
 
     @PostMapping
-    public JsonResult getUserPic(@RequestParam("userId") String userId) {
-        return pictureService.getUserPic(userId);
+    public JsonResult getUserPic() {
+        return pictureService.getUserPic(UserContext.getCurrentUser());
     }
 
     @PostMapping("/ctPic")
