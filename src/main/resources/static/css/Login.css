@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     height: 100vh;
     background: url('../images/background.jpg') no-repeat center center fixed;
@@ -26,12 +26,13 @@ body {
     z-index: 1;
     width: 90%;
     max-width: 400px;
-    margin: auto;
+    /*margin: auto;*/
     box-shadow: 0 10px 25px rgba(92, 61, 112, .3);
     border-radius: 10px;
     background-color: #fff;
     overflow: hidden;
     padding-top: 20px;
+    margin-right: 10%;
 }
 
 .sign-div {

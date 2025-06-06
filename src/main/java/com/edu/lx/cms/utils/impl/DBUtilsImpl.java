@@ -208,5 +208,15 @@ public class DBUtilsImpl implements DBUtils {
         return matterMapper.selectList(wrapper);
     }
 
+    /**
+     * 更改事项状态
+     * @param wrapper
+     * @param matter
+     */
+    @Override
+    public void deleteMatter(LambdaUpdateWrapper<Matter> wrapper, Matter matter) {
+        matterMapper.update(matter, wrapper);
+    }
+
 
 }

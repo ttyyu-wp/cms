@@ -18,4 +18,8 @@ public interface MatterService extends IService<Matter> {
     JsonResult getMatterUser(MatterVO matterVO);
 
     JsonResult getMatterContact(MatterVO matterVO);
+
+    JsonResult delete1Matter(String matterId);
+
+    JsonResult delete2Matter(String matterId);
 }

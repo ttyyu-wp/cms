@@ -6,11 +6,7 @@ import com.edu.lx.cms.service.MatterService;
 import com.edu.lx.cms.utils.JsonResult;
 import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -35,4 +31,15 @@ public class MatterController {
     public JsonResult getMatterContact(@RequestBody MatterVO matterVO) {
         return matterService.getMatterContact(matterVO);
     }
+
+    @DeleteMapping("/delete1")
+    public JsonResult delete1Matter(@RequestParam("matterId") String matterId) {
+        return matterService.delete1Matter(matterId);
+    }
+
+    @DeleteMapping("/delete2")
+    public JsonResult delete2Matter(@RequestParam("matterId") String matterId) {
+        return matterService.delete2Matter(matterId);
+    }
+
 }

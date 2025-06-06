@@ -45,4 +45,6 @@ public interface DBUtils {
     List<Matter> getMatterUser(LambdaQueryWrapper<Matter> in);
 
     List<Matter> getMatterContact(LambdaQueryWrapper<Matter> eq);
+
+    void deleteMatter(LambdaUpdateWrapper<Matter> eq, Matter matter);
 }

@@ -61,9 +61,34 @@ public class MatterServiceImpl extends ServiceImpl<MatterMapper, Matter> impleme
         if (matterVO.getCtId() == null || matterVO.getCtId().equals("")) {
             return JsonResult.error(MatterEnum.MATTER_DELETE_ERROR);
         }
+        //获取matterList
         List<Matter> list = utils.getMatterContact(Wrappers.lambdaQuery(Matter.class)
                 .eq(Matter::getCtId, matterVO.getCtId())
                 .eq(Matter::getMatterDelete, matterVO.getMatterDelete()));
         return JsonResult.success(MatterEnum.MATTER_QUERY_SUCCESS, list);
+    }
+
+    @Override
+    public JsonResult delete1Matter(String matterId) {
+        if (matterId.equals("")) {
+            return JsonResult.error(MatterEnum.MATTER_ID_ERROR);
+        }
+        //根据Delete状态删除
+        utils.deleteMatter(Wrappers.lambdaUpdate(Matter.class)
+                .eq(Matter::getMatterId, matterId),
+                new Matter().setMatterDelete(1));
+        return JsonResult.success(MatterEnum.MATTER_DELETE_SET_1_SUCCESS);
+    }
+
+    @Override
+    public JsonResult delete2Matter(String matterId) {
+        if (matterId.equals("")) {
+            return JsonResult.error(MatterEnum.MATTER_ID_ERROR);
+        }
+        //根据Delete状态修改
+        utils.deleteMatter(Wrappers.lambdaUpdate(Matter.class)
+                        .eq(Matter::getMatterId, matterId),
+                new Matter().setMatterDelete(2));
+        return JsonResult.success(MatterEnum.MATTER_DELETE_SET_2_SUCCESS);
     }
 }
