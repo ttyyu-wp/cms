@@ -218,5 +218,10 @@ public class DBUtilsImpl implements DBUtils {
         matterMapper.update(matter, wrapper);
     }
 
+    @Override
+    public void deleteMatterE(String matterId) {
+        matterMapper.deleteById(matterId);
+    }
+
 
 }

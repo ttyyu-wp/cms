@@ -42,4 +42,9 @@ public class MatterController {
         return matterService.delete2Matter(matterId);
     }
 
+    @DeleteMapping("/delete")
+    public JsonResult deleteMatter(@RequestParam("matterId") String matterId) {
+        return matterService.deleteMatter(matterId);
+    }
+
 }

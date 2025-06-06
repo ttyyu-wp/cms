@@ -91,4 +91,14 @@ public class MatterServiceImpl extends ServiceImpl<MatterMapper, Matter> impleme
                 new Matter().setMatterDelete(2));
         return JsonResult.success(MatterEnum.MATTER_DELETE_SET_2_SUCCESS);
     }
+
+    @Override
+    public JsonResult deleteMatter(String matterId) {
+        if (matterId.equals("")) {
+            return JsonResult.error(MatterEnum.MATTER_ID_ERROR);
+        }
+        //彻底删除事项
+        utils.deleteMatterE(matterId);
+        return JsonResult.success(MatterEnum.MATTER_DELETE_SUCCESS);
+    }
 }
