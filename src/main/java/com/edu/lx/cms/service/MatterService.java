@@ -24,4 +24,6 @@ public interface MatterService extends IService<Matter> {
     JsonResult delete2Matter(String matterId);
 
     JsonResult deleteMatter(String matterId);
+
+    JsonResult addMatter(Matter matter);
 }

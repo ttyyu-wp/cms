@@ -27,6 +27,8 @@ public interface DBUtils {
 
     String getMaxContactPicID();
 
+    String getMaxMatterID();
+
     Integer updateContact(Contact contact);
 
     Integer updateContactPic(Picture picture);
@@ -49,4 +51,6 @@ public interface DBUtils {
     void deleteMatter(LambdaUpdateWrapper<Matter> eq, Matter matter);
 
     void deleteMatterE(String matterId);
+
+    void addMatter(Matter matter);
 }

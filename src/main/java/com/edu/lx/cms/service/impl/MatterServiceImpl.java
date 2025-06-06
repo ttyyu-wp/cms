@@ -1,5 +1,6 @@
 package com.edu.lx.cms.service.impl;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.edu.lx.cms.domain.po.Contact;
 import com.edu.lx.cms.domain.po.Matter;
@@ -10,9 +11,14 @@ import com.edu.lx.cms.service.MatterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.edu.lx.cms.utils.DBUtils;
 import com.edu.lx.cms.utils.JsonResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +31,7 @@ import java.util.stream.Collectors;
  * @since 2025-06-05
  */
 @Service
+@Slf4j
 public class MatterServiceImpl extends ServiceImpl<MatterMapper, Matter> implements MatterService {
     @Autowired
     private DBUtils utils;
@@ -100,5 +107,31 @@ public class MatterServiceImpl extends ServiceImpl<MatterMapper, Matter> impleme
         //彻底删除事项
         utils.deleteMatterE(matterId);
         return JsonResult.success(MatterEnum.MATTER_DELETE_SUCCESS);
+    }
+
+    @Override
+    public JsonResult addMatter(Matter matter) {
+        //判断条件
+        if (matter.getMatter().equals("")) {
+            return JsonResult.error(MatterEnum.MATTER_TEXT_EMPTY);
+        }
+        //校验时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = sdf.parse(matter.getMatterTime());
+            if (date.before(new Date())) {
+                return JsonResult.error(MatterEnum.MATTER_TIME_ERROR);
+            }
+        } catch (ParseException e) {
+            log.error(e.getMessage());
+            return JsonResult.error(MatterEnum.MATTER_TIME_FORMAT_ERROR);
+        }
+        //设定事项状态默认为 0 待完成
+        matter.setMatterDelete(0);
+        //设定matterId为数据库最大matterId加1
+        matter.setMatterId(Integer.parseInt(utils.getMaxMatterID()) + 1 + "");
+        //添加
+        utils.addMatter(matter);
+        return JsonResult.success(MatterEnum.MATTER_ADD_SUCCESS);
     }
 }

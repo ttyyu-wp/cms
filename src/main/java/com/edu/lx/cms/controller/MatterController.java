@@ -1,6 +1,7 @@
 package com.edu.lx.cms.controller;
 
 
+import com.edu.lx.cms.domain.po.Matter;
 import com.edu.lx.cms.domain.vo.MatterVO;
 import com.edu.lx.cms.service.MatterService;
 import com.edu.lx.cms.utils.JsonResult;
@@ -45,6 +46,11 @@ public class MatterController {
     @DeleteMapping("/delete")
     public JsonResult deleteMatter(@RequestParam("matterId") String matterId) {
         return matterService.deleteMatter(matterId);
+    }
+
+    @PostMapping("/add")
+    public JsonResult addMatter(@RequestBody Matter matter) {
+        return matterService.addMatter(matter);
     }
 
 }

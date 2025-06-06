@@ -1,5 +1,6 @@
 package com.edu.lx.cms.domain.po;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.time.LocalDateTime;
@@ -36,7 +37,7 @@ public class Matter implements Serializable {
      * 事项ID
      */
     @TableField("matter_time")
-    private LocalDateTime matterTime;
+    private String matterTime;
 
     /**
      * 事项信息

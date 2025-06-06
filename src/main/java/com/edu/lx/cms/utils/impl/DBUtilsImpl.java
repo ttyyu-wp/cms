@@ -104,8 +104,10 @@ public class DBUtilsImpl implements DBUtils {
     @Override
     public String getMaxContactID() {
         //获得全部Contact  获得list中的最大ctId 返回其值
-        return contactMapper.selectList(Wrappers.lambdaQuery(Contact.class))
-                .stream().max(Comparator.comparing(Contact::getCtId))
+        return contactMapper
+                .selectList(Wrappers.lambdaQuery(Contact.class))
+                .stream()
+                .max(Comparator.comparing(Contact::getCtId))
                 .get().getCtId();
     }
 
@@ -117,9 +119,21 @@ public class DBUtilsImpl implements DBUtils {
     @Override
     public String getMaxContactPicID() {
         //获得全部Picture  获得list中的最大picId 返回其值
-        return pictureMapper.selectList(Wrappers.lambdaQuery(Picture.class))
-                .stream().max(Comparator.comparing(Picture::getPicId))
+        return pictureMapper
+                .selectList(Wrappers.lambdaQuery(Picture.class))
+                .stream()
+                .max(Comparator.comparing(Picture::getPicId))
                 .get().getPicId();
+    }
+
+    @Override
+    public String getMaxMatterID() {
+        //获得全部Matter  获得list中的最大MatterId 返回其值
+        return matterMapper
+                .selectList(Wrappers.lambdaQuery(Matter.class))
+                .stream()
+                .max(Comparator.comparing(Matter::getMatterId))
+                .get().getMatterId();
     }
 
     /**
@@ -218,9 +232,22 @@ public class DBUtilsImpl implements DBUtils {
         matterMapper.update(matter, wrapper);
     }
 
+    /**
+     * 彻底删除事项
+     * @param matterId
+     */
     @Override
     public void deleteMatterE(String matterId) {
         matterMapper.deleteById(matterId);
+    }
+
+    /**
+     * 添加事项
+     * @param matter
+     */
+    @Override
+    public void addMatter(Matter matter) {
+        matterMapper.insert(matter);
     }
 
 
