@@ -250,5 +250,10 @@ public class DBUtilsImpl implements DBUtils {
         matterMapper.insert(matter);
     }
 
+    @Override
+    public UserPicture getMe(LambdaQueryWrapper<UserPicture> wrapper) {
+        return userPictureMapper.selectOne(wrapper);
+    }
+
 
 }

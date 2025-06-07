@@ -1,0 +1,66 @@
+
+.weather-container {
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+}
+
+.weather-day:hover {
+    transform: translateY(-5px);
+}
+
+.weather-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.75rem; /* 减少内边距 */
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    margin: 0.5rem;
+    flex: 1 1 calc(30% - 1rem); /* 根据需要调整宽度 */
+    box-sizing: border-box;
+    transition: transform 0.2s ease;
+}
+
+.weather-icon {
+    width: 32px; /* 缩小图标尺寸 */
+    height: 32px;
+    margin-bottom: 0.25rem; /* 调整与下方文本的距离 */
+}
+
+.weather-day p {
+    margin: 0.15rem 0; /* 减少上下外边距 */
+}
+
+.weather-day h5 {
+    margin-top: 0.25rem; /* 减少上外边距 */
+    font-size: 1rem; /* 调整字体大小 */
+}
+
+/* 行容器添加 gap 分隔卡片 */
+#weatherContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem; /* 卡片之间的间距 */
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .weather-day {
+        flex: 1 1 calc(50% - 0.5rem);
+    }
+}
+
+@media (max-width: 576px) {
+    .weather-day {
+        flex: 1 1 100%;
+    }
+
+    #weatherContainer {
+        justify-content: center;
+    }
+}

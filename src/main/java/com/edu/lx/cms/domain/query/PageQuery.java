@@ -12,26 +12,9 @@ public class PageQuery {
     private String sortBy;
     private Boolean isAsc;
     private String ctDelete;
+    private String ctMf;
+    private String ctName;
 
-    public <T> Page<T> toMpPage(OrderItem... orders){
-        // 1.分页条件
-        Page<T> p = Page.of(pageNo, pageSize);
-        // 2.排序条件
-        // 2.1.先看前端有没有传排序字段
-        if (sortBy != null) {
-            p.addOrder(new OrderItem(sortBy, isAsc));
-            return p;
-        }
-        // 2.2.再看有没有手动指定排序字段
-        if(orders != null){
-            p.addOrder(orders);
-        }
-        return p;
-    }
-
-    public <T> Page<T> toMpPage(String defaultSortBy, boolean isAsc){
-        return this.toMpPage(new OrderItem(defaultSortBy, isAsc));
-    }
 
 
 }

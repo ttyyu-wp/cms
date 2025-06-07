@@ -17,4 +17,6 @@ public interface UserService extends IService<User> {
     JsonResult getUser(User user);
 
     JsonResult register(User user);
+
+    JsonResult getMe();
 }

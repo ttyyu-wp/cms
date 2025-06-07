@@ -53,4 +53,7 @@ public interface DBUtils {
     void deleteMatterE(String matterId);
 
     void addMatter(Matter matter);
+
+
+    UserPicture getMe(LambdaQueryWrapper<UserPicture> eq);
 }

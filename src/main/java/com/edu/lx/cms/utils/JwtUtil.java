@@ -125,7 +125,7 @@ public class JwtUtil {
         }
 
         // 使用密钥进行签名，并构建最终的JWT字符串
-        String token ="Bearer " + builder.sign(Algorithm.HMAC256(secretKey));
+        String token = builder.sign(Algorithm.HMAC256(secretKey));
 
         // 记录生成的JWT，便于调试和监控
         logger.info("Token created for user {}: {}", user.getUserId(), token);

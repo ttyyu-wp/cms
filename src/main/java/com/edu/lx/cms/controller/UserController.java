@@ -5,11 +5,7 @@ import com.edu.lx.cms.domain.po.User;
 import com.edu.lx.cms.service.UserService;
 import com.edu.lx.cms.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -36,4 +32,8 @@ public class UserController {
         return userService.register(user);
     }
 
+    @GetMapping("/me")
+    public JsonResult getMe() {
+        return userService.getMe();
+    }
 }

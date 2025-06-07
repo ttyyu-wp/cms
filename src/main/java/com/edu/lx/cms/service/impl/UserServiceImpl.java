@@ -1,6 +1,9 @@
 package com.edu.lx.cms.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.edu.lx.cms.context.UserContext;
 import com.edu.lx.cms.domain.po.User;
+import com.edu.lx.cms.domain.po.UserPicture;
 import com.edu.lx.cms.mapper.UserMapper;
 import com.edu.lx.cms.enums.UserEnum;
 import com.edu.lx.cms.service.UserService;
@@ -50,5 +53,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         utils.register(user);
         return JsonResult.success(UserEnum.USER_REGISTER_SUCCESS);
+    }
+
+    @Override
+    public JsonResult getMe() {
+         UserPicture up = utils.getMe(Wrappers.lambdaQuery(UserPicture.class)
+                 .eq(UserPicture::getUserId, UserContext.getCurrentUser()));
+         return JsonResult.success(UserEnum.USER_FOUND, up);
     }
 }

@@ -80,6 +80,14 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
         LambdaQueryWrapper<Contact> wrapper = Wrappers.lambdaQuery();
         wrapper.eq(Contact::getUserId, userId)
                 .eq(Contact::getCtDelete, query.getCtDelete());
+        //若查询条件包括姓名 添加
+        if (query.getCtName() != null) {
+            wrapper.like(Contact::getCtName, query.getCtName());
+        }
+        //若查询条件包括性别 添加
+        if (query.getCtMf() != null) {
+            wrapper.eq(Contact::getCtMf, query.getCtMf());
+        }
         List<Contact> records = utils.getContact(page, wrapper).getRecords();
         return JsonResult.success(ContactEnum.CONTACT_QUERY_SUCCESS, records);
     }
