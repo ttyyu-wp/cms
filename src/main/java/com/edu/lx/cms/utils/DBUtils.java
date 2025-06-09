@@ -56,4 +56,8 @@ public interface DBUtils {
 
 
     UserPicture getMe(LambdaQueryWrapper<UserPicture> eq);
+
+    void updateUserPic(LambdaUpdateWrapper<UserPicture> eq, UserPicture userPicture);
+
+    void addUserPic(UserPicture up);
 }

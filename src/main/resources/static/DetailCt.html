@@ -1,0 +1,122 @@
+<!-- DetailCt.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>联系人详情</title>
+  <link href="css/DetailCt.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" >
+</head>
+<body class="container mt-5">
+
+
+  <!-- 标题栏（居中） -->
+  <div class="title-box mb-4 text-center">
+    <h3 class="text-white d-inline-block"><i class="bi bi-person-circle me-2"></i>联系人详情</h3>
+  </div>
+
+  <!-- 图片区域 -->
+  <div class="mb-4 text-center">
+    <div style="position: relative; display: inline-block;">
+      <img id="contact-pic" src="images/default-avatar.jpg" alt="联系人头像"
+           class="rounded-circle border" style="width: 150px; height: 150px; object-fit: cover; cursor: pointer;"
+           title="点击更换头像">
+
+      <!-- 隐藏的文件选择框 -->
+      <input type="file" id="picInput" accept="image/*" style="display: none;" />
+    </div>
+  </div>
+
+  <!-- 卡片内容（宽度不变，内容居中） -->
+  <div class="card p-4 shadow-sm text-center">
+    <ul class="list-group list-group-flush text-start mx-auto" style="max-width: 500px;">
+      <li class="list-group-item"><strong>姓名：</strong><span id="detail-name"></span></li>
+      <li class="list-group-item"><strong>性别：</strong><span id="detail-gender"></span></li>
+      <li class="list-group-item"><strong>电话：</strong><span id="detail-phone"></span></li>
+      <li class="list-group-item"><strong>地址：</strong><span id="detail-address"></span></li>
+      <li class="list-group-item"><strong>邮编：</strong><span id="detail-zipcode"></span></li>
+      <li class="list-group-item"><strong>QQ：</strong><span id="detail-qq"></span></li>
+      <li class="list-group-item"><strong>微信：</strong><span id="detail-wechat"></span></li>
+      <li class="list-group-item"><strong>邮箱：</strong><span id="detail-email"></span></li>
+      <li class="list-group-item"><strong>出生日期：</strong><span id="detail-birth"></span></li>
+    </ul>
+
+    <!-- 按钮区域（居中） -->
+    <div class="mt-3 d-grid gap-2 d-md-flex justify-content-md-center">
+      <button class="btn btn-primary me-2" id="editBtn">编辑</button>
+      <a href="ContactList.html" class="btn btn-secondary">返回列表</a>
+    </div>
+  </div>
+
+  <!-- 编辑模态框 -->
+  <div class="modal fade" id="editContactModal" tabindex="-1" aria-labelledby="editContactModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="editContactForm">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editContactModalLabel">编辑联系人</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="edit-ctId">
+            <div class="mb-3">
+              <label class="form-label">姓名</label>
+              <input type="text" class="form-control" id="edit-ctName" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">性别</label>
+              <select class="form-select" id="edit-ctMf">
+                <option value="男">男</option>
+                <option value="女">女</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">电话</label>
+              <input type="text" class="form-control" id="edit-ctPhone" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">地址</label>
+              <input type="text" class="form-control" id="edit-ctAd">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">邮编</label>
+              <input type="text" class="form-control" id="edit-ctYb">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">QQ</label>
+              <input type="text" class="form-control" id="edit-ctQq">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">微信</label>
+              <input type="text" class="form-control" id="edit-ctWx">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">邮箱</label>
+              <input type="email" class="form-control" id="edit-ctEm">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">出生日期</label>
+              <input type="date" class="form-control" id="edit-ctBirth">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-success">保存更改</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 引入 axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- Bootstrap JS + Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JS -->
+<script type="text/javascript" src="js/api.js"></script>
+<script type="text/javascript" src="js/DetailCt.js"></script>
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.edu.lx.cms.service;
 import com.edu.lx.cms.domain.po.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.edu.lx.cms.utils.JsonResult;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -19,4 +20,6 @@ public interface UserService extends IService<User> {
     JsonResult register(User user);
 
     JsonResult getMe();
+
+    JsonResult upUserPic(String userId, MultipartFile picName);
 }

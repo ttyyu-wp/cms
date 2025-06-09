@@ -2,7 +2,9 @@ package com.edu.lx.cms.service;
 
 import com.edu.lx.cms.domain.po.Picture;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.edu.lx.cms.domain.vo.PictureVO;
 import com.edu.lx.cms.utils.JsonResult;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -18,7 +20,8 @@ public interface PictureService extends IService<Picture> {
 
     JsonResult getContactPic(String ctId);
 
-    JsonResult updateContactPic(Picture picture);
+    JsonResult updateContactPic(String ctId, String picId, MultipartFile picName);
 
     JsonResult addContactPic(Picture picture);
+
 }
