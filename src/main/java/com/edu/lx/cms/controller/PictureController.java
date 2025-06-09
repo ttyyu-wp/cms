@@ -42,7 +42,7 @@ public class PictureController {
     }
 
     @PostMapping("/add")
-    public JsonResult addContactPic(@RequestBody Picture picture) {
-        return pictureService.addContactPic(picture);
+    public JsonResult addContactPic(@RequestPart("picName") MultipartFile picName) {
+        return pictureService.addContactPic(picName);
     }
 }

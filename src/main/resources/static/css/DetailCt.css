@@ -101,8 +101,9 @@ body {
 }
 
 /* 标题栏样式 */
+/*
 .title-box {
-    background-color: #007bff; /* 蓝色背景 */
+    background-color: #007bff; !* 蓝色背景 *!
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -111,7 +112,7 @@ body {
 
 .title-box h3 {
     margin: 0 auto;
-}
+}*/
 
 #contact-pic {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);

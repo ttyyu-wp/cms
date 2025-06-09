@@ -148,4 +148,7 @@ picInput.addEventListener('change', () => {
 });
 
 // 加载详情
-loadContactDetail();
+document.addEventListener("DOMContentLoaded", async () => {
+    initUserInfo();
+    loadContactDetail(); // 再加载联系人
+});

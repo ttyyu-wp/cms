@@ -1,0 +1,98 @@
+/* 整体容器 */
+.container {
+    max-width: 960px;
+    margin-top: 4rem;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 页面标题 */
+.header h2 {
+    font-weight: bold;
+    color: #333;
+}
+
+/* 头像区域 */
+#userAvatar {
+    transition: transform 0.3s ease;
+}
+#userAvatar:hover {
+    transform: scale(1.1);
+}
+
+/* 登出按钮 */
+#logoutBtn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+#logoutBtn:hover {
+    background-color: #c0392b;
+}
+
+/* 表单项标签 */
+.form-label {
+    font-weight: 500;
+    color: #555;
+}
+
+/* 输入框样式 */
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 0.45rem 0.75rem;
+    transition: all 0.3s ease;
+}
+.form-control:focus,
+.form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+/* 按钮样式 */
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* 表单组间距 */
+.row .mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .row .col-md-6 {
+        width: 100%;
+    }
+    .btn {
+        width: 100%;
+    }
+}
+
+.was-validated .form-control:invalid {
+    border-color: #dc3545;
+}
