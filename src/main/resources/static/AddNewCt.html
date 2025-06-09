@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>新增联系人</title>
+    <link href="css/avatar.css" rel="stylesheet">
+    <link href="css/AddNewCt.css" rel="stylesheet">
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div class="container mt-4">
+    <!-- 页面标题 -->
+    <div class="header d-flex align-items-center justify-content-between">
+        <h2 class="mb-0">新增联系人</h2>
+        <div class="d-flex align-items-center">
+            <!-- 头像 -->
+            <div class="position-relative me-2">
+                <img src="images/default-avatar.jpg" alt="用户头像" id="userAvatar"
+                     class="rounded-circle border border-white" style="width: 40px; height: 40px; object-fit: cover; cursor: pointer;"
+                     title="点击更换头像" />
+
+                <!-- 隐藏的文件输入框 -->
+                <input type="file" id="avatarInput" accept="image/*" class="position-absolute w-100 h-100 opacity-0" style="cursor: pointer;">
+            </div>
+
+            <!-- 动态用户名 -->
+            <span id="userName" class="me-3 text-white fw-bold"></span>
+
+            <!-- 登出按钮 -->
+            <button id="logoutBtn" class="btn btn-outline-light btn-sm">登出</button>
+        </div>
+    </div>
+    <!-- 图片区域 -->
+    <div class="mb-4 text-center">
+        <div style="position: relative; display: inline-block;">
+            <img id="contact-pic" src="images/default-avatar.jpg" alt="联系人头像"
+                 class="rounded-circle border" style="width: 150px; height: 150px; object-fit: cover; cursor: pointer;"
+                 title="点击更换头像">
+
+            <!-- 隐藏的文件选择框 -->
+            <input type="file" id="picInput" accept="image/*" style="display: none;" />
+        </div>
+    </div>
+    <form id="addContactForm">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="ctName" class="form-label">姓名</label>
+                <input type="text" class="form-control" id="ctName" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="ctPhone" class="form-label">电话</label>
+                <input type="text" class="form-control" id="ctPhone" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="ctGender" class="form-label">性别</label>
+                <select class="form-select" id="ctGender" required>
+                    <option value="">请选择性别</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="ctAddress" class="form-label">地址</label>
+                <input type="text" class="form-control" id="ctAddress">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="ctZipcode" class="form-label">邮编</label>
+                <input type="text" class="form-control" id="ctZipcode">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="ctQQ" class="form-label">QQ</label>
+                <input type="text" class="form-control" id="ctQQ">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="ctWeChat" class="form-label">微信</label>
+                <input type="text" class="form-control" id="ctWeChat">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="ctEmail" class="form-label">邮箱</label>
+                <input type="email" class="form-control" id="ctEmail">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="ctBirth" class="form-label">出生日期</label>
+                <input type="date" class="form-control" id="ctBirth">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">保存联系人</button>
+        <a href="ContactList.html" class="btn btn-secondary">返回列表</a>
+    </form>
+</div>
+<!-- 引入 Axios 和 API 工具 -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="js/api.js"></script>
+<script type="text/javascript" src="js/avatar.js"></script>
+<script type="text/javascript" src="js/AddNewCt.js"></script>
+</body>
+</html>

@@ -145,13 +145,14 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
             return JsonResult.error(ContactEnum.CONTACT_PHONE_ERROR);
         }
         //设定联系人id为数据库中最大ID值加1
-        contact.setCtId(Integer.parseInt(utils.getMaxContactID()) + 1 + "");
+        String ctId = Integer.parseInt(utils.getMaxContactID()) + 1 + "";
+        contact.setCtId(ctId);
         //设定联系人状态默认为正常0
         contact.setCtDelete(0);
         //设定联系人的userId为当前用户Id
         contact.setUserId(UserContext.getCurrentUser());
         utils.addContact(contact);
-        return JsonResult.success(ContactEnum.CONTACT_ADD_SUCCESS);
+        return JsonResult.success(ContactEnum.CONTACT_ADD_SUCCESS, ctId);
     }
 
     @Override

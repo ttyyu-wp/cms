@@ -4,30 +4,7 @@ body {
     font-family: "Microsoft Yahei", sans-serif;
 }
 
-.header {
-    background-color: #3498db;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
 
-.contact-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-
-.contact-header img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-}
 
 
 .search-bar {
@@ -50,16 +27,3 @@ select.page-select {
     width: auto;
 }
 
-#userAvatar {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border: 2px solid #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease;
-    cursor: pointer;
-}
-
-#userAvatar:hover {
-    transform: scale(1.1);
-}

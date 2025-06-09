@@ -93,12 +93,23 @@ public class PictureServiceImpl extends ServiceImpl<PictureMapper, Picture> impl
     }
 
     @Override
-    public JsonResult addContactPic(Picture picture) {
-        if (picture.getPicName() == null || picture.getPicName().equals("")) {
-            return JsonResult.error(PictureEnum.PICTURE_ERROR);
+    public JsonResult addContactPic(MultipartFile picName) {
+
+        String url = null;
+        try {
+            //调用AliOSS上传图片
+            log.debug("上传过来的参数：{}", picName);
+            url = aliOSSUtils.upload(picName);
+        } catch (IOException e) {
+            return JsonResult.error(PictureEnum.PICTURE_ADD_ERROR);
         }
+        Picture picture = new Picture();
+        picture.setCtId(Integer.parseInt(utils.getMaxContactID()) + 1 + "");
+        picture.setPicName(url);
         picture.setPicId(Integer.parseInt(utils.getMaxContactPicID()) + 1 + "");
+
         utils.addContactPic(picture);
+        log.debug("文件上传完成，url是：{}", url);
         return JsonResult.success(PictureEnum.PICTURE_ADD_SUCCESS);
     }
 }

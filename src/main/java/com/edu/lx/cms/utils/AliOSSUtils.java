@@ -21,6 +21,7 @@ public class AliOSSUtils {
     private String accessKeySecret = "q0IAcbi9Hn492VSoCTP5mW32DJBXj";
     private String bucketName = "cms-lixue";
 
+
     /**
      * 实现上传图片到OSS
      */
