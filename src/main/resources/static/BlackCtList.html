@@ -1,10 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>黑名单列表</title>
+    <link href="css/BlackCtList.css" rel="stylesheet">
+    <link href="css/utils/avatar.css" rel="stylesheet">
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+    </style>
 </head>
 <body>
+<div class="container mt-4">
+    <!-- 页面标题 + 用户信息 -->
+    <div class="header d-flex align-items-center justify-content-between">
+        <h2 class="mb-0">黑名单列表</h2>
+        <div class="d-flex align-items-center">
+            <!-- 头像 -->
+            <div class="position-relative me-2">
+                <img src="images/default-avatar.jpg" alt="用户头像" id="userAvatar"
+                     class="rounded-circle border border-white" style="width: 40px; height: 40px; object-fit: cover; cursor: pointer;"
+                     title="点击更换头像" />
+
+                <!-- 隐藏的文件输入框 -->
+                <input type="file" id="avatarInput" accept="image/*" class="position-absolute w-100 h-100 opacity-0" style="cursor: pointer;">
+            </div>
+
+            <!-- 动态用户名 -->
+            <span id="userName" class="me-3 text-white fw-bold"></span>
+
+            <!-- 登出按钮 -->
+            <button id="logoutBtn" class="btn btn-outline-light btn-sm">登出</button>
+        </div>
+    </div>
+
+    <!-- 搜索栏 -->
+    <div class="search-bar d-flex gap-2 my-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="搜索姓名" />
+        <select id="genderFilter" class="form-select">
+            <option value="all">全部</option>
+            <option value="男">男</option>
+            <option value="女">女</option>
+        </select>
+        <button id="searchBtn" class="btn btn-primary">搜索</button>
+    </div>
+
+    <!-- 联系人表格 -->
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>电话</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="contactTableBody"></tbody>
+    </table>
+
+    <!-- 分页控件 -->
+    <div class="pagination-controls">
+        <button id="prevPage" class="btn btn-outline-secondary">&lt;&lt; 上一页</button>
+        <span id="pageInfo">第 1 页 / 共 1 页</span>
+        <button id="nextPage" class="btn btn-outline-secondary">下一页 &gt;&gt;</button>
+    </div>
+</div>
+
+<!-- 引入 Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="js/utils/api.js"></script>
+<script type="text/javascript" src="js/utils/avatar.js"></script>
+<script type="text/javascript" src="js/utils/myAlert.js"></script>
+<script type="text/javascript" src="js/BlackCtList.js"></script>
 
 </body>
 </html>

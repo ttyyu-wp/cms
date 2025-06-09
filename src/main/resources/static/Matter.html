@@ -1,10 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <title>事项列表</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .table-container {
+            margin-top: 2rem;
+        }
+        .search-bar {
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
+
+<div class="container">
+
+    <h2 class="my-4">事项列表</h2>
+
+    <!-- 搜索栏 -->
+    <div class="search-bar d-flex gap-2 my-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="搜索姓名或事件" />
+        <button id="searchBtn" class="btn btn-primary">搜索</button>
+        <a href="AddMatter.html" class="btn btn-success">新增事项</a>
+    </div>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>姓名</th>
+                <th>时间</th>
+                <th>事件</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="matterTableBody">
+            <!-- 数据将通过 JS 动态插入 -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 分页控件 -->
+    <div class="pagination-controls d-flex justify-content-between align-items-center mt-3">
+        <button id="prevPage" class="btn btn-outline-secondary">&lt;&lt; 上一页</button>
+        <span id="pageInfo">第 1 页 / 共 1 页</span>
+        <button id="nextPage" class="btn btn-outline-secondary">下一页 &gt;&gt;</button>
+    </div>
+
+</div>
+
+<!-- 引入 axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 自定义 API 接口 -->
+<script src="js/utils/api.js"></script>
+
+<script>
+    let currentPage = 1;
+    const pageSize = 10;
+
+    async function loadMatterList(page, searchKey = '') {
+        try {
+            const res = await window.api.post('/matter/list', {
+                page: page,
+                size: pageSize,
+                searchKey: searchKey
+            });
+
+            const matters = res.data.list || [];
+            const total = res.data.total || 0;
+            const tbody = document.getElementById('matterTableBody');
+            tbody.innerHTML = '';
+
+            if (matters.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center">暂无事项记录</td></tr>';
+                return;
+            }
+
+            matters.forEach(matter => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+          <td>${matter.ctName}</td>
+          <td>${matter.matterTime}</td>
+          <td>${matter.matter}</td>
+          <td>
+            <button class="btn btn-sm btn-danger me-2" onclick="updateStatus('${matter.matterId}', 1)">取消</button>
+            <button class="btn btn-sm btn-success" onclick="updateStatus('${matter.matterId}', 2)">完成</button>
+          </td>
+        `;
+
+                tbody.appendChild(row);
+            });
+
+            // 更新分页信息
+            const totalPages = Math.ceil(total / pageSize);
+            document.getElementById('pageInfo').innerText = `第 ${page} 页 / 共 ${totalPages} 页`;
+            currentPage = page;
+
+        } catch (err) {
+            console.error('加载事项失败:', err);
+            alert('加载事项失败');
+        }
+    }
+
+    // 修改事项状态
+    async function updateStatus(matterId, status) {
+        if (!confirm(status === 1 ? '确认取消该事项？' : '确认标记为已完成？')) return;
+
+        try {
+            await window.api.post('/matter/update/status', {
+                matterId: matterId,
+                status: status
+            });
+            alert('状态更新成功');
+            loadMatterList(currentPage); // 刷新当前页
+        } catch (err) {
+            console.error('状态更新失败:', err);
+            alert('状态更新失败');
+        }
+    }
+
+    // 绑定按钮事件
+    document.getElementById('prevPage').addEventListener('click', () => {
+        if (currentPage > 1) {
+            loadMatterList(currentPage - 1, document.getElementById('searchInput').value);
+        }
+    });
+
+    document.getElementById('nextPage').addEventListener('click', () => {
+        loadMatterList(currentPage + 1, document.getElementById('searchInput').value);
+    });
+
+    document.getElementById('searchBtn').addEventListener('click', () => {
+        loadMatterList(1, document.getElementById('searchInput').value);
+    });
+
+    // 页面初始化
+    window.onload = () => {
+        loadMatterList(1);
+    };
+</script>
 
 </body>
 </html>

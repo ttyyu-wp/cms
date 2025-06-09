@@ -1,12 +1,14 @@
 
 
-function getUrlParam(name) {
-    const search = window.location.search || window.location.hash.split('?')[1] || '';
-    const params = new URLSearchParams(search);
-    return params.get(name);
+function getUrlParams(url) {
+    const search = url ? new URL(url).search : window.location.search;
+    return Object.fromEntries(new URLSearchParams(search));
 }
 
-const ctId = getUrlParam('ctId');
+// 获取 URL 中的 ctId 和 ctDelete
+const params = getUrlParams();
+const ctId = params.ctId;
+const ctDelete = params.ctDelete || 0; // 默认为 0（正常联系人
 
 if (!ctId) {
     alert("无效的联系人 ID");
@@ -35,7 +37,7 @@ async function loadContactDetail() {
     try {
         const res = await window.api.post('/contact/one', {
             ctId: ctId,
-            ctDelete: 0
+            ctDelete: ctDelete
         });
 
         currentContact = res.data;

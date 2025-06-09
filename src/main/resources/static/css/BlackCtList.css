@@ -1,0 +1,29 @@
+body {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    font-family: "Microsoft Yahei", sans-serif;
+}
+
+
+
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+table {
+    background-color: white;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+select.page-select {
+    width: auto;
+}
+
