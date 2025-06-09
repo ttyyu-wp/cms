@@ -18,9 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // 保存 token
                     window.api.setToken(response.data);
 
-                    // 获取用户信息
-                    const userResponse = await window.api.get("/user/me");
-                    localStorage.setItem("user", JSON.stringify(userResponse.data));
+
 
                     MyAlert({ status: "success", message: "登录成功" }, "ContactList.html");
                 } else {

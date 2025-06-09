@@ -50,6 +50,36 @@ async function post(url, body) {
     }
 }
 
+async function del(url, params = {}) {
+    try {
+        const response = await apiClient.delete(url, { params });
+        return response.data;
+    } catch (error) {
+        handleError(error);
+    }
+}
+
+async function upload(url, formData) {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        };
+
+        // 添加 token 到 header（如果需要）
+        const token = getToken();
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await axios.post(url, formData, config);
+        return response.data;
+    } catch (error) {
+        handleError(error);
+    }
+}
+
 function handleError(error) {
     console.error('API 请求出错:', error);
     const message = error.response?.data?.message
@@ -63,7 +93,9 @@ function handleError(error) {
 window.api = {
     get,
     post,
+    del: del,
     getToken,
     setToken,
-    removeToken
+    removeToken,
+    up: upload
 };

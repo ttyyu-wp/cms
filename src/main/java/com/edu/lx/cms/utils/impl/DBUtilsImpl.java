@@ -250,9 +250,33 @@ public class DBUtilsImpl implements DBUtils {
         matterMapper.insert(matter);
     }
 
+    /**
+     * 获得当前登录用户
+     * @param wrapper
+     * @return
+     */
     @Override
     public UserPicture getMe(LambdaQueryWrapper<UserPicture> wrapper) {
         return userPictureMapper.selectOne(wrapper);
+    }
+
+    /**
+     * 更新用户头像
+     * @param wrapper
+     * @param userPicture
+     */
+    @Override
+    public void updateUserPic(LambdaUpdateWrapper<UserPicture> wrapper, UserPicture userPicture) {
+        userPictureMapper.update(userPicture, wrapper);
+    }
+
+    /**
+     * 添加用户头像
+     * @param up
+     */
+    @Override
+    public void addUserPic(UserPicture up) {
+        userPictureMapper.insert(up);
     }
 
 

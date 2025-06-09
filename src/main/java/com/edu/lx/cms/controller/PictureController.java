@@ -3,10 +3,12 @@ package com.edu.lx.cms.controller;
 
 import com.edu.lx.cms.context.UserContext;
 import com.edu.lx.cms.domain.po.Picture;
+import com.edu.lx.cms.domain.vo.PictureVO;
 import com.edu.lx.cms.service.PictureService;
 import com.edu.lx.cms.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -22,19 +24,21 @@ public class PictureController {
     @Autowired
     private PictureService pictureService;
 
-    @PostMapping
+    @GetMapping
     public JsonResult getUserPic() {
         return pictureService.getUserPic(UserContext.getCurrentUser());
     }
 
     @PostMapping("/ctPic")
-    public JsonResult getContactPic(@RequestParam("ctId") String ctId) {
-        return pictureService.getContactPic(ctId);
+    public JsonResult getContactPic(@RequestBody Picture picture) {
+        return pictureService.getContactPic(picture.getCtId());
     }
 
     @PostMapping("/update")
-    public JsonResult updateContactPic(@RequestBody Picture picture) {
-        return pictureService.updateContactPic(picture);
+    public JsonResult updateContactPic(@RequestPart("ctId") String ctId,
+                                       @RequestPart("picId") String picId,
+                                       @RequestPart("picName")MultipartFile picName) {
+        return pictureService.updateContactPic(ctId, picId, picName);
     }
 
     @PostMapping("/add")

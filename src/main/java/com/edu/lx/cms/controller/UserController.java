@@ -1,11 +1,13 @@
 package com.edu.lx.cms.controller;
 
 
+import com.edu.lx.cms.context.UserContext;
 import com.edu.lx.cms.domain.po.User;
 import com.edu.lx.cms.service.UserService;
 import com.edu.lx.cms.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <p>
@@ -35,5 +37,10 @@ public class UserController {
     @GetMapping("/me")
     public JsonResult getMe() {
         return userService.getMe();
+    }
+
+    @PostMapping("pic")
+    public JsonResult upUserPic(@RequestPart("picName") MultipartFile picName) {
+        return userService.upUserPic(UserContext.getCurrentUser(), picName);
     }
 }
