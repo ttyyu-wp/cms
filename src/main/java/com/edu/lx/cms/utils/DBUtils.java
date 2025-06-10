@@ -2,7 +2,9 @@ package com.edu.lx.cms.utils;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.edu.lx.cms.domain.dto.MatterDTO;
 import com.edu.lx.cms.domain.po.*;
 
 import javax.management.Query;
@@ -44,7 +46,7 @@ public interface DBUtils {
     List<Contact> getAllContact(LambdaQueryWrapper<Contact> eq);
 
 
-    List<Matter> getMatterUser(LambdaQueryWrapper<Matter> in);
+
 
     List<Matter> getMatterContact(LambdaQueryWrapper<Matter> eq);
 
@@ -60,4 +62,9 @@ public interface DBUtils {
     void updateUserPic(LambdaUpdateWrapper<UserPicture> eq, UserPicture userPicture);
 
     void addUserPic(UserPicture up);
+
+    List<Matter> getMatterAll(LambdaQueryWrapper<Matter> wrapper);
+
+    IPage<MatterDTO> getMatterUser(Page<MatterDTO> page, String userId, Integer matterDelete, String matter, List<String> ctIdList, Boolean isAsc);
+
 }

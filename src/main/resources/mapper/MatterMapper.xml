@@ -2,4 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.lx.cms.mapper.MatterMapper">
 
+    <select id="getMatterUser" resultType="com.edu.lx.cms.domain.dto.MatterDTO">
+        SELECT m.*, c.ct_name AS ctName
+        FROM t_contact_matter m
+        LEFT JOIN t_contact c ON m.ct_id = c.ct_id
+        <where>
+            <if test="matterDelete != null">
+                m.matter_delete = #{matterDelete}
+            </if>
+        </where>
+        AND c.user_id = #{userId}
+        <!-- 模糊搜索事项 -->
+        <if test="matter != null and matter != ''">
+            AND m.matter LIKE CONCAT('%', #{matter}, '%')
+        </if>
+        <!-- ctId 过滤 -->
+        <if test="ctIdList != null and !ctIdList.isEmpty()">
+            AND m.ct_id IN
+            <foreach item="ctId" collection="ctIdList"
+                     open="(" separator="," close=")">
+                #{ctId}
+            </foreach>
+        </if>
+
+        <!-- 排序 -->
+        <if test="isAsc != null">
+            ORDER BY m.matter_time <choose>
+            <when test="isAsc">ASC</when>
+            <otherwise>DESC</otherwise>
+        </choose>
+        </if>
+    </select>
 </mapper>

@@ -1,9 +1,11 @@
-
 body {
     background-color: #f8f9fa;
     padding: 1rem;
     font-family: "Microsoft Yahei", sans-serif;
 }
+
+
+
 
 .search-bar {
     margin-bottom: 20px;
@@ -25,22 +27,9 @@ select.page-select {
     width: auto;
 }
 
-.action-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    gap: 10px;
-    margin-bottom: 1rem;
-}
-
-@media (max-width: 768px) {
-    .action-buttons {
-        flex-direction: column;
-    }
-}
-
 /* 在你的 ContactList.css 文件中添加 */
 .table th, .table td {
     vertical-align: middle; /* 垂直居中 */
     text-align: center;     /* 水平居中 */
 }
+
