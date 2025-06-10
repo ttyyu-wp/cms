@@ -3,25 +3,59 @@
 <head>
     <meta charset="UTF-8" />
     <title>事项列表</title>
+    <link href="css/utils/avatar.css" rel="stylesheet">
+    <link href="css/Matter.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
-        .table-container {
-            margin-top: 2rem;
-        }
-        .search-bar {
-            margin-bottom: 1rem;
-        }
+
     </style>
 </head>
 <body>
 
 <div class="container">
 
-    <h2 class="my-4">事项列表</h2>
+    <!-- 页面标题 + 用户信息 -->
+    <div class="header d-flex align-items-center justify-content-between">
+        <h2 class="mb-0">事项列表</h2>
+        <div class="d-flex align-items-center">
+            <!-- 头像 -->
+            <div class="position-relative me-2">
+                <img src="images/default-avatar.jpg" alt="用户头像" id="userAvatar"
+                     class="rounded-circle border border-white" style="width: 40px; height: 40px; object-fit: cover; cursor: pointer;"
+                     title="点击更换头像" />
+
+                <!-- 隐藏的文件输入框 -->
+                <input type="file" id="avatarInput" accept="image/*" class="position-absolute w-100 h-100 opacity-0" style="cursor: pointer;">
+            </div>
+
+            <!-- 动态用户名 -->
+            <span id="userName" class="me-3 text-white fw-bold"></span>
+
+            <!-- 登出按钮 -->
+            <button id="logoutBtn" class="btn btn-outline-light btn-sm">登出</button>
+        </div>
+    </div>
 
     <!-- 搜索栏 -->
-    <div class="search-bar d-flex gap-2 my-3">
-        <input type="text" id="searchInput" class="form-control" placeholder="搜索姓名或事件" />
+    <div class="search-bar d-flex flex-wrap gap-2 my-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="搜索事件" />
+
+        <!-- 状态筛选下拉框 -->
+        <select id="statusFilter" class="form-select">
+            <option value="">全部</option>
+            <option value="0">待完成</option>
+            <option value="1">取消</option>
+            <option value="2">已完成</option>
+        </select>
+
+        <!-- 排序方式下拉框 -->
+        <select id="sortOrder" class="form-select">
+            <option value="">默认排序</option>
+            <option value="true">时间升序</option>
+            <option value="false">时间降序</option>
+        </select>
+
         <button id="searchBtn" class="btn btn-primary">搜索</button>
         <a href="AddMatter.html" class="btn btn-success">新增事项</a>
     </div>
@@ -50,6 +84,12 @@
         <button id="nextPage" class="btn btn-outline-secondary">下一页 &gt;&gt;</button>
     </div>
 
+    <!-- 返回按钮 -->
+    <div class="text-center mt-4">
+        <a href="ContactList.html" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-1"></i> 返回联系人列表
+        </a>
+    </div>
 </div>
 
 <!-- 引入 axios -->
@@ -57,94 +97,9 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 自定义 API 接口 -->
-<script src="js/utils/api.js"></script>
-
-<script>
-    let currentPage = 1;
-    const pageSize = 10;
-
-    async function loadMatterList(page, searchKey = '') {
-        try {
-            const res = await window.api.post('/matter/list', {
-                page: page,
-                size: pageSize,
-                searchKey: searchKey
-            });
-
-            const matters = res.data.list || [];
-            const total = res.data.total || 0;
-            const tbody = document.getElementById('matterTableBody');
-            tbody.innerHTML = '';
-
-            if (matters.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="text-center">暂无事项记录</td></tr>';
-                return;
-            }
-
-            matters.forEach(matter => {
-                const row = document.createElement('tr');
-
-                row.innerHTML = `
-          <td>${matter.ctName}</td>
-          <td>${matter.matterTime}</td>
-          <td>${matter.matter}</td>
-          <td>
-            <button class="btn btn-sm btn-danger me-2" onclick="updateStatus('${matter.matterId}', 1)">取消</button>
-            <button class="btn btn-sm btn-success" onclick="updateStatus('${matter.matterId}', 2)">完成</button>
-          </td>
-        `;
-
-                tbody.appendChild(row);
-            });
-
-            // 更新分页信息
-            const totalPages = Math.ceil(total / pageSize);
-            document.getElementById('pageInfo').innerText = `第 ${page} 页 / 共 ${totalPages} 页`;
-            currentPage = page;
-
-        } catch (err) {
-            console.error('加载事项失败:', err);
-            alert('加载事项失败');
-        }
-    }
-
-    // 修改事项状态
-    async function updateStatus(matterId, status) {
-        if (!confirm(status === 1 ? '确认取消该事项？' : '确认标记为已完成？')) return;
-
-        try {
-            await window.api.post('/matter/update/status', {
-                matterId: matterId,
-                status: status
-            });
-            alert('状态更新成功');
-            loadMatterList(currentPage); // 刷新当前页
-        } catch (err) {
-            console.error('状态更新失败:', err);
-            alert('状态更新失败');
-        }
-    }
-
-    // 绑定按钮事件
-    document.getElementById('prevPage').addEventListener('click', () => {
-        if (currentPage > 1) {
-            loadMatterList(currentPage - 1, document.getElementById('searchInput').value);
-        }
-    });
-
-    document.getElementById('nextPage').addEventListener('click', () => {
-        loadMatterList(currentPage + 1, document.getElementById('searchInput').value);
-    });
-
-    document.getElementById('searchBtn').addEventListener('click', () => {
-        loadMatterList(1, document.getElementById('searchInput').value);
-    });
-
-    // 页面初始化
-    window.onload = () => {
-        loadMatterList(1);
-    };
-</script>
+<script type="text/javascript" src="js/utils/api.js"></script>
+<script type="text/javascript" src="js/utils/avatar.js"></script>
+<script type="text/javascript" src="js/Matter.js"></script>
 
 </body>
 </html>

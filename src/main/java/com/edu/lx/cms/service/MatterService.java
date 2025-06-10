@@ -2,6 +2,7 @@ package com.edu.lx.cms.service;
 
 import com.edu.lx.cms.domain.po.Matter;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.edu.lx.cms.domain.query.PageQuery;
 import com.edu.lx.cms.domain.vo.MatterVO;
 import com.edu.lx.cms.utils.JsonResult;
 
@@ -15,15 +16,16 @@ import com.edu.lx.cms.utils.JsonResult;
  */
 public interface MatterService extends IService<Matter> {
 
-    JsonResult getMatterUser(MatterVO matterVO);
+    JsonResult getMatterUser(PageQuery query);
 
     JsonResult getMatterContact(MatterVO matterVO);
 
-    JsonResult delete1Matter(String matterId);
 
-    JsonResult delete2Matter(String matterId);
-
-    JsonResult deleteMatter(String matterId);
+    JsonResult deleteMatterEnd(String matterId);
 
     JsonResult addMatter(Matter matter);
+
+    JsonResult deleteByDel(Matter matter);
+
+    JsonResult getTotalMatterPage(PageQuery query);
 }

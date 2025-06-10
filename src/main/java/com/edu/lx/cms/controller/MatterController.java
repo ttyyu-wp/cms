@@ -2,6 +2,7 @@ package com.edu.lx.cms.controller;
 
 
 import com.edu.lx.cms.domain.po.Matter;
+import com.edu.lx.cms.domain.query.PageQuery;
 import com.edu.lx.cms.domain.vo.MatterVO;
 import com.edu.lx.cms.service.MatterService;
 import com.edu.lx.cms.utils.JsonResult;
@@ -24,8 +25,13 @@ public class MatterController {
     private MatterService matterService;
 
     @PostMapping("/all")
-    public JsonResult getMatterUser(@RequestBody MatterVO matterVO) {
-        return matterService.getMatterUser(matterVO);
+    public JsonResult getMatterUser(@RequestBody PageQuery query) {
+        return matterService.getMatterUser(query);
+    }
+
+    @PostMapping("/page")
+    public JsonResult getTotalMatterPage(@RequestBody PageQuery query) {
+        return matterService.getTotalMatterPage(query);
     }
 
     @PostMapping("/one")
@@ -33,19 +39,14 @@ public class MatterController {
         return matterService.getMatterContact(matterVO);
     }
 
-    @DeleteMapping("/delete1")
-    public JsonResult delete1Matter(@RequestParam("matterId") String matterId) {
-        return matterService.delete1Matter(matterId);
-    }
-
-    @DeleteMapping("/delete2")
-    public JsonResult delete2Matter(@RequestParam("matterId") String matterId) {
-        return matterService.delete2Matter(matterId);
+    @PostMapping("/deleteByDel")
+    public JsonResult deleteByDel(@RequestBody Matter matter) {
+        return matterService.deleteByDel(matter);
     }
 
     @DeleteMapping("/delete")
     public JsonResult deleteMatter(@RequestParam("matterId") String matterId) {
-        return matterService.deleteMatter(matterId);
+        return matterService.deleteMatterEnd(matterId);
     }
 
     @PostMapping("/add")

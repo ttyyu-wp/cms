@@ -2,15 +2,16 @@ package com.edu.lx.cms.utils.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.edu.lx.cms.domain.dto.MatterDTO;
 import com.edu.lx.cms.domain.po.*;
 import com.edu.lx.cms.mapper.*;
 import com.edu.lx.cms.utils.DBUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.management.Query;
 import java.util.Comparator;
 import java.util.List;
 
@@ -208,8 +209,8 @@ public class DBUtilsImpl implements DBUtils {
      * @return
      */
     @Override
-    public List<Matter> getMatterUser(LambdaQueryWrapper<Matter> wrapper) {
-        return matterMapper.selectList(wrapper);
+    public IPage<MatterDTO> getMatterUser(Page<MatterDTO> page, String userId, Integer matterDelete, String matter, List<String> ctIdList, Boolean isAsc) {
+        return matterMapper.getMatterUser(page, userId, matterDelete, matter, ctIdList, isAsc);
     }
 
     /**
@@ -277,6 +278,11 @@ public class DBUtilsImpl implements DBUtils {
     @Override
     public void addUserPic(UserPicture up) {
         userPictureMapper.insert(up);
+    }
+
+    @Override
+    public List<Matter> getMatterAll(LambdaQueryWrapper<Matter> wrapper) {
+        return matterMapper.selectList(wrapper);
     }
 
 

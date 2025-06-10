@@ -6,15 +6,16 @@ import lombok.Data;
 
 @Data
 public class PageQuery {
-    private String userId;
     private Long pageNo;
     private Long pageSize;
     private String sortBy;
-    private Boolean isAsc;
+    private String isAsc;
+    private String ctId;
     private String ctDelete;
     private String ctMf;
     private String ctName;
-
-
+    private String matterDelete;
+    private String matterId;
+    private String matter;
 
 }
