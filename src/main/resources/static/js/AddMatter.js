@@ -15,8 +15,9 @@ window.onload = async function () {
         });
     } catch (err) {
         console.error('获取联系人失败:', err);
-        alert('无法加载联系人列表，请刷新页面重试。');
+        MyAlertByStr('无法加载联系人列表，请刷新页面重试。', false);
     }
+    initUserInfo();
 };
 
 // 表单提交逻辑
@@ -31,7 +32,7 @@ document.getElementById('addMatterForm').addEventListener('submit', async functi
     const ctId = selectedOption ? selectedOption.value : null;
 
     if (!ctId || !matterTime || !matter) {
-        alert('请填写完整信息');
+        MyAlertByStr('请填写完整信息', false);
         return;
     }
 
@@ -42,11 +43,11 @@ document.getElementById('addMatterForm').addEventListener('submit', async functi
             matter: matter,
         });
 
-        alert('事项添加成功');
+        MyAlertByStr('事项添加成功', true);
         window.location.href = 'Matter.html'; // 跳转回事项列表页
     } catch (err) {
         console.error('事项添加失败:', err);
-        alert('事项添加失败');
+        MyAlertByStr('事项添加失败', false);
     }
 });
 
@@ -55,7 +56,3 @@ document.getElementById('matter').addEventListener('input', function () {
     document.getElementById('wordCount').textContent = count;
 });
 
-// 页面初始化
-window.onload = () => {
-    initUserInfo();
-};

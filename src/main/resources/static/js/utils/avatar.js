@@ -3,7 +3,7 @@ async function initUserInfo() {
     const token = window.api.getToken();
 
     if (!token) {
-        alert('请先登录');
+        MyAlertByStr('请先登录', false);
         window.location.href = 'Login.html';
         return;
     }
@@ -31,7 +31,7 @@ async function initUserInfo() {
 document.getElementById("logoutBtn").addEventListener("click", () => {
     window.api.removeToken();
     localStorage.removeItem("user");
-    alert("您已登出");
+    MyAlertByStr("您已登出", false);
     window.location.href = "Login.html";
 });
 

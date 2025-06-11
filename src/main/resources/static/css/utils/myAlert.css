@@ -1,0 +1,20 @@
+/* ========== 自定义提示框样式 ========== */
+#custom-alert {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 9999;
+    max-width: 500px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+    /* 关键样式：禁止换行 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

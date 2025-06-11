@@ -70,24 +70,51 @@ async function loadMatterList(page, matter = '', matterDelete = '', isAsc = '') 
 
     } catch (err) {
         console.error('加载事项失败:', err);
-        alert('加载事项失败');
+        MyAlertByStr('加载事项失败', false);
     }
 }
 
 // 修改事项状态
 async function updateStatus(matterId, matterDelete) {
-    if (!confirm(matterDelete === 1 ? '确认取消该事项？' : '确认标记为已完成？')) return;
+
+    let confirmMsg = '';
+    if (matterDelete === 0) {
+        confirmMsg = '确认重新标记为【待完成】？';
+    } else if (matterDelete === 1) {
+        confirmMsg = '确认标记为【取消】？';
+    } else if (matterDelete === 2) {
+        confirmMsg = '确认标记为【已完成】？';
+    }
+
+    const result = await Swal.fire({
+        title: '请确认',
+        text: confirmMsg,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        reverseButtons: true // 让取消按钮在左边
+    });
+
+    if (!result.isConfirmed) return;
 
     try {
-        await window.api.post('/matter/deleteByDel', {
+        const res = await window.api.post('/matter/deleteByDel', {
             matterId: matterId,
             matterDelete: matterDelete
         });
-        alert('状态更新成功');
+        if (matterDelete === 0) {
+            MyAlertByStr("状态已修改为待完成！", true);
+        } else if (matterDelete === 1) {
+            MyAlertByStr("状态已修改为取消！", true);
+        } else if (matterDelete === 2) {
+            MyAlertByStr("状态已修改为已完成！", true);
+        }
+        //alert('状态更新成功');
         loadMatterList(currentPage); // 刷新当前页
     } catch (err) {
         console.error('状态更新失败:', err);
-        alert('状态更新失败');
+        MyAlertByStr('状态更新失败',false);
     }
 }
 

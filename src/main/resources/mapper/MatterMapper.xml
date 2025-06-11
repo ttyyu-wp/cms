@@ -33,4 +33,7 @@
         </choose>
         </if>
     </select>
+    <select id="getMaxMatterId" resultType="java.lang.String">
+        SELECT MAX(matter_id) FROM t_contact_matter
+    </select>
 </mapper>

@@ -17,12 +17,12 @@ document.getElementById('addContactForm').addEventListener('submit', function(ev
         .then(response => {
             // 检查是否是 success 状态
             if (response.status === 'success') {
-                alert(response.message || '联系人添加成功');
+               MyAlertByStr(response.message, true);
                 document.getElementById('addContactForm').reset();
                 // 跳转到联系人列表页
                 window.location.href = 'ContactList.html';
             } else {
-                alert(response.message || '未知错误');
+                MyAlertByStr(response.message, false);
             }
         })
         .catch(error => {
@@ -34,7 +34,7 @@ document.getElementById('addContactForm').addEventListener('submit', function(ev
                 || error.message
                 || '网络错误，请稍后再试';
 
-            alert(errorMessage);
+            MyAlertByStr(errorMessage, false);
         });
 });
 
@@ -66,11 +66,11 @@ picInput.addEventListener('change', () => {
     // 使用 axios 发送请求（需要支持 multipart/form-data）
     window.api.up('/picture/add', formData)
         .then(response => {
-            alert('头像更新成功！');
+            MyAlertByStr('头像更新成功！', true);
         })
         .catch(error => {
             console.error('上传失败:', error);
-            alert('头像上传失败，请重试。');
+            MyAlertByStr('头像上传失败，请重试。', false);
         });
 });
 
