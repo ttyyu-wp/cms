@@ -79,18 +79,33 @@ function bindContactActions() {
     // 屏蔽（删除）按钮点击
     document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
-            if (!confirm('确定要屏蔽此联系人？')) return;
-
             const ctId = e.target.dataset.id;
+
+            const result = await Swal.fire({
+                title: '确定要屏蔽此联系人？',
+                text: "该操作将该联系人移入黑名单",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '确定删除',
+                cancelButtonText: '取消',
+                reverseButtons: true,
+                customClass: {
+                    confirmButton: 'btn btn-danger me-2',
+                    cancelButton: 'btn btn-secondary'
+                },
+                buttonsStyling: false
+            });
+
+            if (!result.isConfirmed) return;
 
             try {
                 await window.api.del('/contact/delete', { ctId });
-
+                MyAlertByStr("屏蔽成功！", true)
                 // 删除成功后重新加载当前页
                 loadContacts(currentPage);
             } catch (err) {
                 console.error('屏蔽失败:', err);
-                alert('屏蔽联系人失败');
+                MyAlertByStr('屏蔽联系人失败', false);
             }
         });
     });

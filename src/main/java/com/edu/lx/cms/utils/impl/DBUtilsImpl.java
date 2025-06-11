@@ -120,21 +120,13 @@ public class DBUtilsImpl implements DBUtils {
     @Override
     public String getMaxContactPicID() {
         //获得全部Picture  获得list中的最大picId 返回其值
-        return pictureMapper
-                .selectList(Wrappers.lambdaQuery(Picture.class))
-                .stream()
-                .max(Comparator.comparing(Picture::getPicId))
-                .get().getPicId();
+        return pictureMapper.getMaxContactId();
     }
 
     @Override
     public String getMaxMatterID() {
         //获得全部Matter  获得list中的最大MatterId 返回其值
-        return matterMapper
-                .selectList(Wrappers.lambdaQuery(Matter.class))
-                .stream()
-                .max(Comparator.comparing(Matter::getMatterId))
-                .get().getMatterId();
+        return matterMapper.getMaxMatterId();
     }
 
     /**

@@ -79,18 +79,33 @@ function bindContactActions() {
     // 屏蔽（删除）按钮点击
     document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
-            if (!confirm('确定要解除屏蔽此联系人？')) return;
-
             const ctId = e.target.dataset.id;
+
+            const result = await Swal.fire({
+                title: '确认操作',
+                text: '确定要解除屏蔽此联系人？',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                reverseButtons: true,
+                customClass: {
+                    confirmButton: 'btn btn-primary me-2',
+                    cancelButton: 'btn btn-secondary'
+                },
+                buttonsStyling: false
+            });
+
+            if (!result.isConfirmed) return;
 
             try {
                 await window.api.get('/contact/cancel', { ctId });
-
+                MyAlertByStr("解除屏蔽成功!", true);
                 // 删除成功后重新加载当前页
                 loadContacts(currentPage);
             } catch (err) {
                 console.error('解除屏蔽失败:', err);
-                alert('解除屏蔽联系人失败');
+                MyAlertByStr('解除屏蔽联系人失败', false);
             }
         });
     });

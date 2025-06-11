@@ -11,7 +11,7 @@ const ctId = params.ctId;
 const ctDelete = params.ctDelete || 0; // 默认为 0（正常联系人
 
 if (!ctId) {
-    alert("无效的联系人 ID");
+    MyAlertByStr("无效的联系人 ID", false);
     window.location.href = "ContactList.html";
 }
 
@@ -54,7 +54,7 @@ async function loadContactDetail() {
 
     } catch (err) {
         console.error('加载联系人详情失败:', err);
-        alert('加载联系人详情失败');
+        MyAlertByStr('加载联系人详情失败', false);
         window.location.href = "ContactList.html";
     }
 }
@@ -62,7 +62,7 @@ async function loadContactDetail() {
 // 绑定编辑按钮点击事件
 document.getElementById('editBtn').addEventListener('click', () => {
     if (!currentContact) {
-        alert("数据未加载完成");
+        MyAlertByStr("数据未加载完成", false);
         return;
     }
 
@@ -103,12 +103,12 @@ document.getElementById('editContactForm').addEventListener('submit', async (e) 
 
     try {
         await window.api.post('/contact/update', updatedContact);
-        alert('更新成功');
+        MyAlertByStr('更新成功', true);
         loadContactDetail(); // 刷新详情页
         bootstrap.Modal.getInstance(document.getElementById('editContactModal')).hide();
     } catch (err) {
         console.error('更新失败:', err);
-        alert('更新联系人失败，请重试');
+        MyAlertByStr('更新联系人失败，请重试', false);
     }
 });
 
@@ -141,11 +141,11 @@ picInput.addEventListener('change', () => {
     // 使用 axios 发送请求（需要支持 multipart/form-data）
     window.api.up('/picture/update', formData)
         .then(response => {
-            alert('头像更新成功！');
+            MyAlertByStr('头像更新成功！', true);
         })
         .catch(error => {
             console.error('上传失败:', error);
-            alert('头像上传失败，请重试。');
+            MyAlertByStr('头像上传失败，请重试。', false);
         });
 });
 

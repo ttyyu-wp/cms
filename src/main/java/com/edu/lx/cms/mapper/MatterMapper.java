@@ -30,4 +30,6 @@ public interface MatterMapper extends BaseMapper<Matter> {
                                           @Param("matter") String matter,
                                           @Param("ctIdList") List<String> ctIdList,
                                           @Param("isAsc") Boolean isAsc);
+
+    String getMaxMatterId();
 }
