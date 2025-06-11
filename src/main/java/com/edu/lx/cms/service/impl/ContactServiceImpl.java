@@ -175,4 +175,12 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
                 .eq(Contact::getCtId, ctId));
         return JsonResult.success(ContactEnum.CONTACT_CANCEL_DELETE_SUCCESS);
     }
+
+    @Override
+    public JsonResult getContactNames() {
+        List<Contact> contacts = utils.getAllContact(Wrappers.lambdaQuery(Contact.class)
+                .eq(Contact::getUserId, UserContext.getCurrentUser())
+                .eq(Contact::getCtDelete, 0));
+        return JsonResult.success(ContactEnum.CONTACT_QUERY_SUCCESS, contacts);
+    }
 }

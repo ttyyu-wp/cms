@@ -57,4 +57,9 @@ public class ContactController {
         return contactService.cancelDeleteContact(ctId);
     }
 
+    @GetMapping("/names")
+    public JsonResult getContactNames() {
+        return contactService.getContactNames();
+    }
+
 }

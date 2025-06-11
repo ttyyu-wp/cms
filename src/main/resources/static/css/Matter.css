@@ -75,7 +75,6 @@ tbody tr:hover {
     }
 }
 
-/* 在你的 ContactList.css 文件中添加 */
 .table th, .table td {
     vertical-align: middle; /* 垂直居中 */
     text-align: center;     /* 水平居中 */

@@ -126,7 +126,7 @@ public class MatterServiceImpl extends ServiceImpl<MatterMapper, Matter> impleme
             return JsonResult.error(MatterEnum.MATTER_TEXT_EMPTY);
         }
         //校验时间
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         try {
             Date date = sdf.parse(matter.getMatterTime());
             if (date.before(new Date())) {

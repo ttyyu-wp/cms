@@ -28,4 +28,7 @@ public interface ContactService extends IService<Contact> {
     JsonResult deleteContact(String ctId);
 
     JsonResult cancelDeleteContact(String ctId);
+
+    JsonResult getContactNames();
+
 }
