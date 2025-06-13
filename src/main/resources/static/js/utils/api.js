@@ -7,7 +7,8 @@ const apiClient = axios.create({
     baseURL: API_BASE_URL,
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    withCredentials: true
 });
 
 function getToken() {
@@ -64,7 +65,8 @@ async function upload(url, formData) {
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data'
-            }
+            },
+            withCredentials: true
         };
 
         // 添加 token 到 header（如果需要）

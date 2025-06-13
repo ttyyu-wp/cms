@@ -59,6 +59,13 @@ picInput.addEventListener('change', () => {
     };
     reader.readAsDataURL(file);
 
+    // 文件大小限制判断（1MB）
+    const MAX_SIZE = 1024 * 1024; // 1MB
+    if (file.size > MAX_SIZE) {
+        MyAlertByStr("头像大小不能超过 1MB，请重新选择", false);
+        return;
+    }
+
     // 提交到后端
     const formData = new FormData();
     formData.append('picName', file); // 假设后端接收字段名为 picFile

@@ -16,10 +16,10 @@ import java.util.UUID;
 @Component
 public class AliOSSUtils {
 
-    private String endpoint = "https://oss-cn-beijing.aliyuncs.com";
-    private String accessKeyId = "LTAI5tSSJFtEvNVEonAB1y1f";
-    private String accessKeySecret = "q0IAcbi9Hn492VSoCTP5mW32DJBXj";
-    private String bucketName = "cms-lixue";
+    private String endpoint = "endpoint";
+    private String accessKeyId = "your_key_id";
+    private String accessKeySecret = "Your_key_secret";
+    private String bucketName = "bucketName";
 
 
     /**
