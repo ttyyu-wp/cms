@@ -35,6 +35,10 @@ public class JwtInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if ("OPTIONS".equals(request.getMethod())) {
+            return true;
+        }
+
         /**
          * 从请求头中获取"Authorization"字段，它应该包含Bearer令牌。
          * 这个令牌用于验证用户的身份。
@@ -48,6 +52,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (token == null || !token.startsWith("Bearer ")) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             log.error("令牌丢失或无效");
+            setCORS(response);
             return false; // 中断请求
         }
 
@@ -67,6 +72,7 @@ public class JwtInterceptor implements HandlerInterceptor {
              * 如果令牌无效或已过期，设置响应状态为401 Unauthorized，并返回错误信息。
              */
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            setCORS(response);
             log.error("令牌无效或已过期");
 
             return false; // 中断请求
@@ -90,6 +96,11 @@ public class JwtInterceptor implements HandlerInterceptor {
          * 如果令牌验证成功，返回true以继续执行下一个拦截器或Controller。
          */
         return true;
+    }
+
+    private void setCORS(HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://192.168.137.1:8080");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
     }
 
     @Override

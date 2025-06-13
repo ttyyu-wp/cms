@@ -10,10 +10,9 @@
             <if test="matterDelete != null">
                 m.matter_delete = #{matterDelete}
             </if>
-        </where>
         AND c.user_id = #{userId}
         <!-- 模糊搜索事项 -->
-        <if test="matter != null and matter != ''">
+        <if test="matter != null and matter != '' ">
             AND m.matter LIKE CONCAT('%', #{matter}, '%')
         </if>
         <!-- ctId 过滤 -->
@@ -24,7 +23,7 @@
                 #{ctId}
             </foreach>
         </if>
-
+        </where>
         <!-- 排序 -->
         <if test="isAsc != null">
             ORDER BY m.matter_time <choose>
