@@ -16,11 +16,11 @@ import java.util.UUID;
 @Component
 public class AliOSSUtils {
 
-    private String endpoint = "endpoint";
-    private String accessKeyId = "your_key_id";
-    private String accessKeySecret = "Your_key_secret";
-    private String bucketName = "bucketName";
 
+    private String endpoint = "endpoint";
+    private String accessKeyId = "accessKeyId";
+    private String accessKeySecret = "accessKeySecret";
+    private String bucketName = "bucketName";
 
     /**
      * 实现上传图片到OSS
