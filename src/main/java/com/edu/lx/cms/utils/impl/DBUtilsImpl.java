@@ -73,7 +73,8 @@ public class DBUtilsImpl implements DBUtils {
      * @return
      */
     @Override
-    public Page<Contact> getContact(Page<Contact> page, LambdaQueryWrapper<Contact> wrapper) {
+    public Page<Contact> getContact(Page<Contact> page,
+                                    LambdaQueryWrapper<Contact> wrapper) {
         return contactMapper.selectPage(page, wrapper);
     }
 

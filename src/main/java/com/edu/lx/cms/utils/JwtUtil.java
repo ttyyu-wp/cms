@@ -28,7 +28,6 @@ public class JwtUtil {
     private static final String secretKey = loadSecretKey();
 
     // 设置JWT的过期时间为604800秒（即1周）
-//    private static final Long expiration = 1209600L;
     private static final Long expiration = 604800L;
     /**
      * 加载JWT使用的密钥。
@@ -100,7 +99,7 @@ public class JwtUtil {
         }
 
         // 设置JWT的过期时间为当前时间加上1周（1周的毫秒数）
-        long twoWeeksInMilliseconds = 7 * 24 * 60 * 60 * 1000L;
+        long twoWeeksInMilliseconds = expiration;
         //创建了一个Date对象，表示从当前时间起加上一周后的日期和时间，这个日期和时间将被用作JWT的过期时间
         Date expireDate = new Date(System.currentTimeMillis() + twoWeeksInMilliseconds);
 

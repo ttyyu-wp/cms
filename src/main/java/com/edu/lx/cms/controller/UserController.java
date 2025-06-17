@@ -23,7 +23,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    //TODO 检测用户名或密码为空错误
+
     @PostMapping("/login")
     public JsonResult getUser(@RequestBody User user) {
         return userService.getUser(user);

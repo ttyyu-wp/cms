@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.edu.lx.cms.context.UserContext;
 import com.edu.lx.cms.domain.po.Contact;
+import com.edu.lx.cms.domain.po.Picture;
 import com.edu.lx.cms.domain.query.PageQuery;
 import com.edu.lx.cms.enums.ContactEnum;
 import com.edu.lx.cms.mapper.ContactMapper;
@@ -28,6 +29,7 @@ import java.util.List;
 @Service
 public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> implements ContactService {
 
+    private final String DEFAULT_AVATAR = "https://cms-lixue.oss-cn-beijing.aliyuncs.com/8d012298-f574-46ee-9110-1d4073fc2f5b.jpg";
     private final Long DEFAULT_PAGESIZE = Long.parseLong("5");
     private final Long DEFAULT_PAGENO = Long.parseLong("0");
     private static final String POSTAL_CODE_REGEX = "^[1-9]\\d{5}(?!\\d)$";
@@ -151,6 +153,13 @@ public class ContactServiceImpl extends ServiceImpl<ContactMapper, Contact> impl
         contact.setCtDelete(0);
         //设定联系人的userId为当前用户Id
         contact.setUserId(UserContext.getCurrentUser());
+        //检查若未添加头像则在数据库添加使用的默认头像
+        Picture contactPic = utils.getContactPic(Wrappers.lambdaQuery(Picture.class)
+                .eq(Picture::getCtId, ctId));
+        if (contactPic == null) {
+            utils.addContactPic(new Picture(ctId, ctId, DEFAULT_AVATAR));
+        }
+        //添加具体联系人
         utils.addContact(contact);
         return JsonResult.success(ContactEnum.CONTACT_ADD_SUCCESS, ctId);
     }
